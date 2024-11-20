@@ -1,33 +1,45 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class SignIn {
- final FirebaseAuth _auth = FirebaseAuth.instance;
- Future<void> signInWithGoogle() async {
-   // Create a new provider
-   GoogleAuthProvider googleProvider = GoogleAuthProvider();
-   googleProvider.addScope('https://www.googleapis.com/auth/userinfo.email');
-   googleProvider.setCustomParameters({
-     'prompt': "select_account"
-   });
-   // Once signed in, return the UserCredential
-   await FirebaseAuth.instance.signInWithRedirect(googleProvider);
-   // Or use signInWithRedirect
-   // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
- }
-   // Method to handle the redirect result
-  Future<UserCredential?> handleRedirectResult() async {
+class GoogleAuth {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  // Handle Google Sign-In
+  Future<User?> handleGoogleSignIn() async {
     try {
-      // After the redirect, get the result
-      final UserCredential userCredential = await FirebaseAuth.instance.getRedirectResult();
-      return userCredential;
+      // Trigger the Google sign-in flow
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        // Obtain the authentication details from the Google account
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+        // Create a new credential for Firebase using the obtained authentication
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // Sign in to Firebase with the Google credentials
+        final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+        return userCredential.user;
+      }
     } catch (e) {
-      print('Error handling redirect result: $e');
-      return null; // Handle errors appropriately
+      print("Error during Google Sign-In: $e");
+    }
+    return null;
+  }
+  Future<void> handleSignOut() async {
+    try {
+      // Sign out from Firebase
+      await _auth.signOut();
+
+      // Sign out from Google
+      await _googleSignIn.signOut();
+      print("User signed out successfully.");
+    } catch (e) {
+      print("Error during Google Sign-Out: $e");
     }
   }
- Future<void> logout() async {
-   await _auth.signOut();
-   await GoogleSignIn().signOut();
- }
 }
