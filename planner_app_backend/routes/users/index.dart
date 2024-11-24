@@ -1,7 +1,8 @@
 import 'package:dart_frog/dart_frog.dart';
 import 'package:postgres/postgres.dart';
+import 'prisma/generated_client/client.dart';
 
-
+final prisma = PrismaClient();
 
 
 Future<Result> getUsersFromDb() async {
@@ -64,6 +65,14 @@ Future<Response> _getUsers(){
 
 Future<Response> _createUser(RequestContext context)async{
 final json = (await context.request.json()) as Map<String,dynamic>;
+final user = await prisma.user.create(
+  data: PrismaUnion.$1(UserCreateInput(
+    email: "seven@odroe.com",
+    name: PrismaUnion.$1("Seven Du"),
+  )),
+);
+prisma.users.create(data:UserCreateInput(name:name,lastname:lastname));
+
 final name = json['name'];
 final lastname = json ['lastname'];
 
@@ -86,7 +95,8 @@ Future<Result> addUserToDb() async {
     database: '',
     username: '',
     password: '',
-  ));
+  ),
+  );
 
   print('Connected to database');
   final result = await connection.execute(

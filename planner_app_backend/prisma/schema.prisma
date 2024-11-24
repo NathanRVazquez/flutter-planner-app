@@ -1,14 +1,89 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider = "dart run orm"
+  // output   = "../lib/src/generated/prisma_client"
+
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model assignments {
+  assignment_id   Int               @id @default(autoincrement())
+  create_date     DateTime?         @db.Timestamp(6)
+  subject         String            @db.VarChar(255)
+  notes           String?
+  due_date        DateTime?         @db.Timestamp(6)
+  assignment_type assignment_type?
+  list_id         Int
+  todo_lists      todo_lists        @relation(fields: [list_id], references: [list_id], onDelete: NoAction, onUpdate: NoAction)
+  project_members project_members[]
+  projects        projects?
+  reminders       reminders?
+}
+
+model project_members {
+  project_member_id Int         @id @default(autoincrement())
+  assignment_id     Int
+  member_username   String?     @db.VarChar(255)
+  assignments       assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+  users             users?      @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model projects {
+  assignment_id Int         @unique
+  complete_date DateTime?   @db.Timestamp(6)
+  completed     Boolean
+  assignments   assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+  tasks         tasks[]
+}
+
+model reminders {
+  assignment_id     Int                @unique
+  reminder_category reminder_category?
+  assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model tasks {
+  assignment_id  Int       @unique
+  complete_date  DateTime? @db.Timestamp(6)
+  completed      Boolean
+  parent_project Int?
+  projects       projects? @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model todo_lists {
+  user_id     Int
+  list_id     Int           @id
+  assignments assignments[]
+  users       users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  user_id         Int               @id @default(autoincrement())
+  email           String            @db.VarChar(255)
+  signin_method   String?           @db.VarChar(255)
+  name            String            @db.VarChar(255)
+  device          String?           @db.VarChar(255)
+  username        String            @unique @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  join_date       DateTime?         @db.Timestamp(6)
+  user_timezone   Int
+  project_members project_members[]
+  todo_lists      todo_lists[]
+}
+
+enum assignment_type {
+  Reminder
+  Task
+  Project
+}
+
+enum reminder_category {
+  Event
+  Meeting
+  Webinar
+  Interview
+  Tutoring
 }
