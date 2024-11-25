@@ -1,13 +1,11 @@
-ignore
+
 .vscode
 planner_app_backend/.vscode
 test-db.dart
 ../lib/src/prisma/generated
 cloud-sql-proxy
-# hunter-439519-4b323ff9b0da.json
-# hunter-439519-4b323ff9b0da.json:Zone.Identifier
-# hunter-439519-4b323ff9b0da.json:Zone.Identifier
-# hunter-439519-24e55e396888.json:Zone.Identifier
+hunter-439519-4b323ff9b0daa.json
+hunter-439519-4b323ff9b0daa.json:Zone.Identifier
 node_modules
 # See https://www.dartlang.org/guides/libraries/private-files
 .env
