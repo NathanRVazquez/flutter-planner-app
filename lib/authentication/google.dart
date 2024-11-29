@@ -6,7 +6,7 @@ class GoogleAuth {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   // Handle Google Sign-In
-  Future<User?> handleGoogleSignIn() async {
+  Future<User?> googleSignIn() async {
     try {
       // Trigger the Google sign-in flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -26,20 +26,14 @@ class GoogleAuth {
         return userCredential.user;
       }
     } catch (e) {
-      print("Error during Google Sign-In: $e");
+      print("Google Sign-In Error: $e");
     }
     return null;
   }
-  Future<void> handleSignOut() async {
-    try {
-      // Sign out from Firebase
-      await _auth.signOut();
 
-      // Sign out from Google
-      await _googleSignIn.signOut();
-      print("User signed out successfully.");
-    } catch (e) {
-      print("Error during Google Sign-Out: $e");
-    }
+  // Handle Google Sign-Out
+  Future<void> googleSignOut() async {
+      await _auth.signOut(); // Sign out from Firebase
+      await _googleSignIn.signOut(); // Sign out from Google
   }
 }

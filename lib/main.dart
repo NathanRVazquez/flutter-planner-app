@@ -6,16 +6,6 @@ import 'package:planner_app/pages/home.dart';
 
 Future<void> main() async {
  WidgetsFlutterBinding.ensureInitialized();
-//    const FirebaseOptions firebaseOptions = FirebaseOptions(
-//     apiKey: 'AIzaSyCm9mlOdUNogO2yxzC2h3MTDIQ23sqlbng',
-//     appId: '1:397613401767:web:6b500e3f2ef58ac9d7fd82',
-//     messagingSenderId: '397613401767',
-//     projectId: 'flutter-midterm-practice',
-//     authDomain: 'flutter-midterm-practice.firebaseapp.com',
-//     storageBucket: 'flutter-midterm-practice.appspot.com',
-//     measurementId: 'G-3R7P44Y7FP',
-//  );
-//  await Firebase.initializeApp(options: firebaseOptions);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform, 
   );

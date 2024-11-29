@@ -6,45 +6,90 @@ import 'package:planner_app/pages/login.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-class logOutPage extends StatefulWidget {
-  const logOutPage({super.key});
+class LogOutPage extends StatefulWidget {
+  const LogOutPage({super.key});
 
   @override
-  State<logOutPage> createState() => _logOutPageState();
+  State<LogOutPage> createState() => _LogOutPageState();
 }
 
-class _logOutPageState extends State<logOutPage> {
+class _LogOutPageState extends State<LogOutPage> {
   // Firebase Auth instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
   // Google Sign-In instance
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  // Handle Logout
-  void _googleLogout() async {
+
+  // Handle Email Sign-Out
+  Future<void> _emailSignOut() async {
     try {
-      // Sign out from Firebase
-      await _auth.signOut();
-
-      // Sign out from Google
-      await _googleSignIn.signOut();
-
-      // Optionally, navigate to the Login Page
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-
-      print("User logged out.");
+      // Check if the user is signed in with email
+      User? user = FirebaseAuth.instance.currentUser;
+      
+      if (user != null) {
+        // User is signed in, proceed with sign-out
+        await EmailAuth().signOut();
+        
+        // Show Snackbar message after successful sign-out
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("You have signed out of your email account."),
+            backgroundColor:  Color.fromARGB(119, 144, 196, 255),
+          ),
+        );
+        
+        // Navigate back to LoginPage after sign-out
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPage()), 
+        );
+      } else {
+        // If no user is logged in, show an error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content:Text("You are not logged in using email."),
+            backgroundColor:  Color.fromARGB(119, 144, 196, 255),
+          ),
+        );
+      }
     } catch (e) {
-      print("Error logging out: $e");
+      print("Error during email sign-out: $e");
     }
   }
-    Future<void> _emailSignOut() async {
-    await EmailAuth().signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage()), // Navigate back to LoginPage after sign out
-    );
+
+  // Handle Google Sign-Out
+  Future<void> _googleSignOut() async {
+    try {
+      // Check if the user is signed in
+      User? user = _auth.currentUser;
+      
+      if (user != null) {
+        // User is logged in, proceed with sign-out
+        await _auth.signOut();
+        await _googleSignIn.signOut();
+        // Show Snackbar message after successful sign-out
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("You have signed out of your Google account."),
+            backgroundColor:  Color.fromARGB(119, 144, 196, 255),
+          ),
+        );
+        // Navigate to HomePage after sign-out
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()), 
+        );
+      } else {
+        // If no user is logged in, show an error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("You are not logged in using Google."),
+            backgroundColor:  Color.fromARGB(119, 144, 196, 255),
+          ),
+        );
+      }
+    } catch (e) {
+      print("Error during Google sign-out: $e");
+    }
   }
 
   @override
@@ -55,77 +100,64 @@ class _logOutPageState extends State<logOutPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // Center the elements
           children: [
-            // Logout Button
+            // Email Logout Button
             Transform.scale(
-                  scale: 1.2,
-                  child: SignInButton(
-                    Buttons.email,
-                    text: "Email Sign Out",
-                    onPressed: () {
-                      _emailSignOut;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
-                      );
-                    },
-                  ),
-            ),
-            const SizedBox(height: 15),
-            Transform.scale(
-                  scale: 1.2,
-                  child: SignInButton(
-                    Buttons.google,
-                    text: "Google Sign Out",
-                    onPressed: () {
-                      _googleLogout;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
-                      );
-                    },
-                  ),
-            ),
-             const SizedBox(height: 15),
-            // Logout Button
-            Transform.scale(
-                  scale: 1.2,
-                  child: SignInButton(
-                    Buttons.microsoft,
-                    text: "Microsoft Sign Out",
-                    onPressed: () {
-                      _emailSignOut;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
-                      );
-                    },
-                  ),
-            ),
-            const SizedBox(height: 15),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white, // White background
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero, // No rounded corners
-                side: BorderSide(color: Colors.blue), // Border color (optional)
-              ),
-              elevation: 0, // Remove shadow
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40), // Adjust padding for rectangular shape
-            ),
-            child: const Text(
-              "Go Back To Login Page",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.blue, // Blue text color
+              scale: 1.2,
+              child: SignInButton(
+                Buttons.email,
+                text: "Email Sign Out",
+                onPressed: _emailSignOut, // Call the email sign-out method
               ),
             ),
-          ),
+            const SizedBox(height: 15),
+            
+            // Google Logout Button
+            Transform.scale(
+              scale: 1.2,
+              child: SignInButton(
+                Buttons.google,
+                text: "Google Sign Out",
+                onPressed: _googleSignOut, // Call the Google sign-out method
+              ),
+            ),
+            const SizedBox(height: 15),
+            
+            // Microsoft Logout Button (Handle if needed)
+            Transform.scale(
+              scale: 1.2,
+              child: SignInButton(
+                Buttons.microsoft,
+                text: "Microsoft Sign Out",
+                onPressed:(){} // Call the Microsoft sign-out method
+              ),
+            ),
+            const SizedBox(height: 15),
+            
+            // Go Back to Login Page Button
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, // White background
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // No rounded corners
+                  side: BorderSide(color: Colors.blue), // Border color (optional)
+                ),
+                elevation: 0, // Remove shadow
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40), // Adjust padding for rectangular shape
+              ),
+              child: const Text(
+                "Go Back To Login Page",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.blue, // Blue text color
+                ),
+              ),
+            ),
           ],
         ),
       ),

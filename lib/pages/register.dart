@@ -20,9 +20,21 @@ class _RegisterState extends State<Register> {
       password: passwordController.text,
     );
     // Display a SnackBar with the result
+    if (emailController.text.isNotEmpty || passwordController.text.isNotEmpty ) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(info)),
+      SnackBar(
+        content: Text(info),
+        backgroundColor:  const Color.fromARGB(119, 144, 196, 255),
+        ),
     );
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Please enter Your email and Password"),
+        backgroundColor:Color.fromARGB(119, 144, 196, 255),),
+    );
+    }
 
     // Clear the text fields after registration
     emailController.clear();
@@ -111,8 +123,8 @@ class _RegisterState extends State<Register> {
                     _userSignUp(); // Call the user registration method
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
+                    backgroundColor:Colors.white,
+                    foregroundColor: Colors.blue,
                   ),
                   child: const Text(
                     "Register",
