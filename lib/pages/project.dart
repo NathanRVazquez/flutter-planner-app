@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/home.dart';
-import 'package:planner_app/pages/calendar.dart';
+import 'package:planner_app/pages/reminder.dart';
 import 'package:planner_app/pages/task.dart';
 
 class ProjectPage extends StatefulWidget{
@@ -99,7 +99,7 @@ class ProjectPageState extends State<ProjectPage> {
   void _calendarPageRoute(){
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const CalendarPage()),
+      MaterialPageRoute(builder: (context) => const ReminderPage()),
     );
   }
 

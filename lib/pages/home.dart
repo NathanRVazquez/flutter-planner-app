@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:planner_app/pages/Reminder.dart';
 import 'package:planner_app/pages/login.dart';
-import 'package:planner_app/pages/calendar.dart';
 import 'package:planner_app/pages/task.dart';
 import 'package:planner_app/pages/project.dart';
 
@@ -23,7 +23,7 @@ class HomePageState extends State<HomePage> {
 
       body: const Center(
           child: Text(
-            'Home Page',
+            'About The App',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -51,16 +51,16 @@ class HomePageState extends State<HomePage> {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
-          label: 'Calendar',
+          label: 'Reminder',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.task),
           label: 'Tasks',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.assignment),
-          label: 'Projects',
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.assignment),
+        //   label: 'Projects',
+        // ),
       ],
       onTap: _onTap,
       currentIndex: _currentIndex,
@@ -70,13 +70,10 @@ class HomePageState extends State<HomePage> {
   void _onTap(int index){
     switch(index) {
       case 0:
-        _calendarPageRoute();
+        _reminderPageRoute();
         break;
       case 1:
         _taskPageRoute();
-        break;
-      case 2:
-        _projectPageRoute();
         break;
     }
   }
@@ -88,10 +85,10 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void _calendarPageRoute(){
+  void _reminderPageRoute(){
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const CalendarPage()),
+      MaterialPageRoute(builder: (context) => const ReminderPage()),
     );
   }
 

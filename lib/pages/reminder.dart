@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/home.dart';
-import 'package:planner_app/pages/monthcalendar.dart';
 import 'package:planner_app/pages/task.dart';
-import 'package:planner_app/pages/project.dart';
+// import 'package:planner_app/pages/project.dart';
 
-class CalendarPage extends StatefulWidget {
-  const CalendarPage({super.key});
+class ReminderPage extends StatefulWidget {
+  const ReminderPage({super.key});
 
   @override
-  CalendarPageState createState() => CalendarPageState();
+  ReminderPageState createState() => ReminderPageState();
 }
 
-class CalendarPageState extends State<CalendarPage> {
+class ReminderPageState extends State<ReminderPage> {
   final int _currentIndex = 0;
   List<Map<String, String>> tasks = [
     {'subject': 'New Task', 'dueDate': 'Due Date'},
@@ -27,20 +26,20 @@ class CalendarPageState extends State<CalendarPage> {
       appBar: _topAppBar(),
       body: Stack(
         children: [
-          Positioned(
-            top: 10,
-            right: 10,
-            child: ElevatedButton(
-              onPressed: _monthTaskPageRoute,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              ),
-              child: const Text(
-                "Month's Tasks",
-                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 10,
+          //   right: 10,
+          //   child: ElevatedButton(
+          //     onPressed: _monthTaskPageRoute,
+          //     style: ElevatedButton.styleFrom(
+          //       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          //     ),
+          //     child: const Text(
+          //       "Month's Tasks",
+          //       style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          //     ),
+          //   ),
+          // ),
           Positioned(
             top: 70,
             left: 0,
@@ -98,56 +97,74 @@ class CalendarPageState extends State<CalendarPage> {
         label: const Icon(Icons.home),
       ),
       backgroundColor: const Color.fromARGB(255, 3, 64, 113),
-      title: const Text('Planner App Calendar'),
+      title: const Text('Planner App Reminder'),
       actions: [
-        TextButton(onPressed: _loginPageRoute, child: const Text('LOGIN')),
+        TextButton(onPressed: _loginPageRoute, child: const Text('Account')),
       ],
     );
   }
-
-  Widget _bottomNavBar() {
+Widget _bottomNavBar(){
     return BottomNavigationBar(
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: 'Calendar'),
-        BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
-        BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Projects'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_month),
+          label: 'Reminder',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.task),
+          label: 'Tasks',
+        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.assignment),
+        //   label: 'Projects',
+        // ),
       ],
       onTap: _onTap,
       currentIndex: _currentIndex,
     );
   }
 
-  void _onTap(int index) {
-    switch (index) {
+  void _onTap(int index){
+    switch(index) {
       case 0:
+        _reminderPageRoute();
         break;
       case 1:
         _taskPageRoute();
         break;
-      case 2:
-        _projectPageRoute();
-        break;
     }
   }
 
-  void _loginPageRoute() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+  void _loginPageRoute(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
   }
 
-  void _homePageRoute() {
+  void _reminderPageRoute(){
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const ReminderPage()),
+    );
+  }
+
+  void _taskPageRoute(){
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const TaskPage())
+    );
+  }
+
+  // void _projectPageRoute(){
+  //   Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => const ProjectPage())
+  //   );
+  // }
+
+   void _homePageRoute() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
-  }
-
-  void _taskPageRoute() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TaskPage()));
-  }
-
-  void _projectPageRoute() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProjectPage()));
-  }
-
-  void _monthTaskPageRoute() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const Monthcalendar()));
   }
 
   Future<void> _pickDueDate(int index) async {
