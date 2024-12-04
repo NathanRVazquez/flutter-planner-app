@@ -63,7 +63,7 @@ class EmailAuth {
     }
   }
 
-  // Method for handling password reset with a new password
+  // Method for handling reset password
   Future<String> confirmPasswordReset({required String newPassword, required String oobCode}) async {
     try {
       await _auth.confirmPasswordReset(

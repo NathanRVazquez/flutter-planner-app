@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
   final GoogleAuth _googleAuth = GoogleAuth();
 
-  void _googleSignIn() async {
+  void _googleSignIn() async { // Google sign in method
     final user = await _googleAuth.googleSignIn();
     if (user != null) {
       Navigator.pushReplacement(
@@ -28,41 +28,45 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> _emailSignIn() async {
-    String info = await EmailAuth().signIn( // Sign in using the email and password in textfie
-      email: emailController.text,
-      password: passwordController.text,
+ Future<void> _emailSignIn() async {
+  // Check if email and password are not empty
+  if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Please enter your email and password'),
+        backgroundColor: Color.fromARGB(119, 144, 196, 255),
+      ),
     );
-      // Clear the text fields
-    emailController.clear();
-    passwordController.clear();
-
-     if (emailController.text.isNotEmpty || passwordController.text.isNotEmpty ) {
-      ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(info),
-        backgroundColor:  const Color.fromARGB(119, 144, 196, 255),
-        ),
-    );
-     }
-     else{
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter your email and password'),
-          backgroundColor:  Color.fromARGB(119, 144, 196, 255),
-          ),
-      );
-     }
-
-    // Only navigate if the sign-in was successful
-    if (info == "Login successful") {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    }
+    return; 
   }
-void _forgotPassword() {
+
+  String info = await EmailAuth().signIn( // Sign in using email and password
+    email: emailController.text,
+    password: passwordController.text,
+  );
+
+  // Clear the text fields sign-in
+  emailController.clear();
+  passwordController.clear();
+
+  // Show the result of the sign-in attempt
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(info),
+      backgroundColor: const Color.fromARGB(119, 144, 196, 255),
+    ),
+  );
+
+  // Only navigate if sign-in was successful
+  if (info == "Login Successful") {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
+}
+
+void _forgotPassword() { // Reset Password
   showDialog(
     context: context,
     builder: (context) {
@@ -103,7 +107,7 @@ void _forgotPassword() {
           TextButton(
             onPressed: () async {
               final email = resetEmailController.text;
-              String result = await EmailAuth().sendPasswordResetEmail(email: email);
+              String result = await EmailAuth().sendPasswordResetEmail(email: email); // Send a reset email
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(result)),
               );
@@ -121,162 +125,170 @@ void _forgotPassword() {
 }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: GestureDetector(
-        onTap: () { // Close keyboard when tapping outside of TextFields
-          FocusScope.of(context).unfocus();
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.home),
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
         },
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'lib/assets/plannerlogo.jpg',
-                  width: 100,
-                  height: 100,
+      ),
+      backgroundColor: const Color.fromARGB(255, 3, 64, 113),
+      title: const Text(
+        "Planner App Login",
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+    backgroundColor: Colors.white,
+    body: GestureDetector(
+      onTap: () {
+        // Close keyboard when tapping outside of TextFields
+        FocusScope.of(context).unfocus();
+      },
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'lib/assets/plannerlogo.jpg',
+                width: 100,
+                height: 100,
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Email",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18,
                 ),
-                const SizedBox(height: 5),
-                const Text(
-                  "Planner App Login Page",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(179, 3, 64, 113),
+              ),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: emailController,
+                  obscureText: false, // Don't obscure the email
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter Your Email",
                   ),
                 ),
-                const SizedBox(height: 5),
-                const Text(
-                  "Email",
+              ),
+              const Text(
+                "Password",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter Your Password",
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextButton( // Register account
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Register()),
+                  );
+                },
+                child: const Text(
+                  "Don't have an account?",
                   style: TextStyle(
                     color: Colors.blue,
+                    decoration: TextDecoration.underline,
                     fontSize: 18,
                   ),
                 ),
-                SizedBox(
-                  width: 300,
-                  child: TextField(
-                    controller: emailController,
-                    obscureText: false,  // Don't obscure the email
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Enter Your Email",
-                    ),
-                  ),
-                ),
-                const Text(
-                  "Password",
+              ),
+              TextButton(
+                onPressed: () {
+                  _forgotPassword();
+                },
+                child: const Text(
+                  "Forgot Email Password?",
                   style: TextStyle(
                     color: Colors.blue,
+                    decoration: TextDecoration.underline,
                     fontSize: 18,
                   ),
                 ),
-                SizedBox(
-                  width: 300,
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Enter Your Password",
-                    ),
-                  ),
+              ),
+              const SizedBox(height: 15),
+              Transform.scale(
+                scale: 1.2,
+                child: SignInButton(
+                  Buttons.google,
+                  text: "Sign In Using Google", // Sign In using google
+                  onPressed: _googleSignIn,
                 ),
-                const SizedBox(height: 10),
-                TextButton(
+              ),
+              const SizedBox(height: 15),
+              Transform.scale(
+                scale: 1.2,
+                child: SignInButton(
+                  Buttons.email,
+                  text: "Sign In Using Email",
+                  onPressed: _emailSignIn, // Sign In using email
+                ),
+              ),
+              const SizedBox(height: 15),
+              Transform.scale(
+                scale: 1.2,
+                child: SignInButton(
+                  Buttons.microsoft,
+                  text: "Sign In Using Microsoft",
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Register()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   },
-                  child: const Text(
-                    "Don't have an account?",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                      fontSize: 18,
-                    ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogOutPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero, 
+                    side: BorderSide(color: Colors.white), // Set border color to white
+                  ),
+                  elevation: 0, 
+                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0), // Adjust padding for rectangular shape
+                ),
+                child: const Text( // Navigate to sign out option
+                  "Sign Out Option",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.blue, 
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    _forgotPassword();
-                  },
-                  child: const Text(
-                    "Forgot Email Pasword?",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Transform.scale(
-                  scale: 1.2,
-                  child: SignInButton(
-                    Buttons.google,
-                    text: "Sign In Using Google",
-                    onPressed: _googleSignIn,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Transform.scale(
-                  scale: 1.2,
-                  child: SignInButton(
-                    Buttons.email,
-                    text: "Sign In Using Email",
-                    onPressed: _emailSignIn, // Use the correct method to sign in
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Transform.scale(
-                  scale: 1.2,
-                  child: SignInButton(
-                    Buttons.microsoft,
-                    text: "Sign In Using Microsoft",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 15),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const LogOutPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, // White background
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero, // No rounded corners
-                      side: BorderSide(color: Colors.white), // Border color (optional)
-                    ),
-                    elevation: 0, // Remove shadow
-                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0), // Adjust padding for rectangular shape
-                  ),
-                  child: const Text(
-                    "Sign Out Option",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.blue, // Blue text color
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
-    );
+    ),
+  );
   }
 }

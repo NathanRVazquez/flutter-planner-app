@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:planner_app/pages/Reminder.dart';
 import 'package:planner_app/pages/login.dart';
+import 'package:planner_app/pages/support.dart';
 import 'package:planner_app/pages/task.dart';
-import 'package:planner_app/pages/project.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -18,9 +18,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: _topAppBar(),
-
       body: const Center(
           child: Text(
             'About The App',
@@ -33,7 +31,7 @@ class HomePageState extends State<HomePage> {
       ),
 
       bottomNavigationBar: _bottomNavBar(),
-    );
+      );
   }
 
   PreferredSizeWidget _topAppBar(){
@@ -46,7 +44,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _bottomNavBar(){
+ Widget _bottomNavBar(){
     return BottomNavigationBar(
       items: const [
         BottomNavigationBarItem(
@@ -57,10 +55,10 @@ class HomePageState extends State<HomePage> {
           icon: Icon(Icons.task),
           label: 'Tasks',
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.assignment),
-        //   label: 'Projects',
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.question_mark_rounded),
+          label: 'Support',
+        ),
       ],
       onTap: _onTap,
       currentIndex: _currentIndex,
@@ -74,6 +72,9 @@ class HomePageState extends State<HomePage> {
         break;
       case 1:
         _taskPageRoute();
+        break;
+      case 2:
+        _supportPageRoute();
         break;
     }
   }
@@ -98,11 +99,10 @@ class HomePageState extends State<HomePage> {
         MaterialPageRoute(builder: (context) => const TaskPage())
     );
   }
-
-  void _projectPageRoute(){
+  void _supportPageRoute(){
     Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const ProjectPage())
+        MaterialPageRoute(builder: (context) => const SupportPage())
     );
   }
 }

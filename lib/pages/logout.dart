@@ -14,9 +14,7 @@ class LogOutPage extends StatefulWidget {
 }
 
 class _LogOutPageState extends State<LogOutPage> {
-  // Firebase Auth instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  // Google Sign-In instance
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   // Handle Email Sign-Out
@@ -24,19 +22,16 @@ class _LogOutPageState extends State<LogOutPage> {
     try {
       // Check if the user is signed in with email
       User? user = FirebaseAuth.instance.currentUser;
-      
       if (user != null) {
         // User is signed in, proceed with sign-out
         await EmailAuth().signOut();
-        
-        // Show Snackbar message after successful sign-out
+        // Show Snackbar message successful sign-out
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("You have signed out of your email account."),
             backgroundColor:  Color.fromARGB(119, 144, 196, 255),
           ),
         );
-        
         // Navigate back to LoginPage after sign-out
         Navigator.pushReplacement(
           context,
@@ -55,7 +50,6 @@ class _LogOutPageState extends State<LogOutPage> {
       print("Error during email sign-out: $e");
     }
   }
-
   // Handle Google Sign-Out
   Future<void> _googleSignOut() async {
     try {
@@ -98,7 +92,7 @@ class _LogOutPageState extends State<LogOutPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center the elements
+          mainAxisAlignment: MainAxisAlignment.center, 
           children: [
             // Email Logout Button
             Transform.scale(
@@ -122,7 +116,7 @@ class _LogOutPageState extends State<LogOutPage> {
             ),
             const SizedBox(height: 15),
             
-            // Microsoft Logout Button (Handle if needed)
+            // Microsoft Logout Button
             Transform.scale(
               scale: 1.2,
               child: SignInButton(
@@ -142,13 +136,13 @@ class _LogOutPageState extends State<LogOutPage> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, // White background
+                backgroundColor: Colors.white, 
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero, // No rounded corners
-                  side: BorderSide(color: Colors.blue), // Border color (optional)
+                  borderRadius: BorderRadius.zero, 
+                  side: BorderSide(color: Colors.blue), 
                 ),
                 elevation: 0, // Remove shadow
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40), // Adjust padding for rectangular shape
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40), 
               ),
               child: const Text(
                 "Go Back To Login Page",

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:planner_app/pages/Reminder.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/home.dart';
+import 'package:planner_app/pages/support.dart';
 
 
 class TaskPage extends StatefulWidget {
@@ -26,22 +27,8 @@ class TaskPageState extends State<TaskPage> {
       appBar: _topAppBar(),
       body: Stack(
         children: [
-          // Positioned(
-          //   top: 10,
-          //   right: 10,
-          //   child: ElevatedButton(
-          //     onPressed: _monthTaskPageRoute,
-          //     style: ElevatedButton.styleFrom(
-          //       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          //     ),
-          //     child: const Text(
-          //       "Month's Tasks",
-          //       style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          //     ),
-          //   ),
-          // ),
           Positioned(
-            top: 70,
+            top: 25,
             left: 0,
             right: 0,
             child: Center(
@@ -56,7 +43,7 @@ class TaskPageState extends State<TaskPage> {
             ),
           ),
           Positioned(
-            top: 120,
+            top: 80,
             left: 20,
             right: 20,
             bottom: 80,
@@ -115,10 +102,10 @@ Widget _bottomNavBar(){
           icon: Icon(Icons.task),
           label: 'Tasks',
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.assignment),
-        //   label: 'Projects',
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.question_mark_rounded),
+          label: 'Support',
+        ),
       ],
       onTap: _onTap,
       currentIndex: _currentIndex,
@@ -132,6 +119,9 @@ Widget _bottomNavBar(){
         break;
       case 1:
         _taskPageRoute();
+        break;
+      case 2:
+        _supportPageRoute();
         break;
     }
   }
@@ -157,16 +147,16 @@ Widget _bottomNavBar(){
     );
   }
 
-  // void _projectPageRoute(){
-  //   Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => const ProjectPage())
-  //   );
-  // }
-
-   void _homePageRoute() {
+  void _supportPageRoute(){
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const SupportPage())
+    );
+  }
+  void _homePageRoute() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
   }
+
 
   Future<void> _pickDueDate(int index) async {
     DateTime? selectedDate = await showDatePicker(

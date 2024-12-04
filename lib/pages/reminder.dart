@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/home.dart';
+import 'package:planner_app/pages/support.dart';
 import 'package:planner_app/pages/task.dart';
 // import 'package:planner_app/pages/project.dart';
 
@@ -15,7 +16,7 @@ class ReminderPage extends StatefulWidget {
 class ReminderPageState extends State<ReminderPage> {
   final int _currentIndex = 0;
   List<Map<String, String>> tasks = [
-    {'subject': 'New Task', 'dueDate': 'Due Date'},
+    {'subject': 'New Reminder', 'dueDate': 'Date'},
   ];
   final List<bool> _checkedStates = [false];
 
@@ -26,27 +27,13 @@ class ReminderPageState extends State<ReminderPage> {
       appBar: _topAppBar(),
       body: Stack(
         children: [
-          // Positioned(
-          //   top: 10,
-          //   right: 10,
-          //   child: ElevatedButton(
-          //     onPressed: _monthTaskPageRoute,
-          //     style: ElevatedButton.styleFrom(
-          //       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          //     ),
-          //     child: const Text(
-          //       "Month's Tasks",
-          //       style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          //     ),
-          //   ),
-          // ),
           Positioned(
-            top: 70,
+            top: 25,
             left: 0,
             right: 0,
             child: Center(
               child: Text(
-                'Task Due This Month:',
+                'Reminder List:',
                 style: GoogleFonts.poppins(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -56,7 +43,7 @@ class ReminderPageState extends State<ReminderPage> {
             ),
           ),
           Positioned(
-            top: 120,
+            top: 80,
             left: 20,
             right: 20,
             bottom: 80,
@@ -82,7 +69,7 @@ class ReminderPageState extends State<ReminderPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addTask,
+        onPressed: _addReminder,
         backgroundColor: const Color(0xFF90C4FF),
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -114,10 +101,10 @@ Widget _bottomNavBar(){
           icon: Icon(Icons.task),
           label: 'Tasks',
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.assignment),
-        //   label: 'Projects',
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.question_mark_rounded),
+          label: 'Support',
+        ),
       ],
       onTap: _onTap,
       currentIndex: _currentIndex,
@@ -131,6 +118,9 @@ Widget _bottomNavBar(){
         break;
       case 1:
         _taskPageRoute();
+        break;
+      case 2:
+        _supportPageRoute();
         break;
     }
   }
@@ -156,14 +146,13 @@ Widget _bottomNavBar(){
     );
   }
 
-  // void _projectPageRoute(){
-  //   Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => const ProjectPage())
-  //   );
-  // }
-
-   void _homePageRoute() {
+  void _supportPageRoute(){
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const SupportPage())
+    );
+  }
+  void _homePageRoute() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
   }
 
@@ -171,8 +160,8 @@ Widget _bottomNavBar(){
     DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2101),
+      firstDate: DateTime(1940),
+      lastDate: DateTime(2201),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData(
@@ -192,24 +181,24 @@ Widget _bottomNavBar(){
     }
   }
 
-  void _addTask() {
+  void _addReminder() {
     setState(() {
-      tasks.add({'subject': 'New Task', 'dueDate': 'Due Date'});
+      tasks.add({'subject': 'New Reminder', 'dueDate': 'Date'});
       _checkedStates.add(false);
     });
   }
 
-  Future<void> _editTaskSubject(int index) async {
+  Future<void> _editReminder(int index) async {
     TextEditingController controller = TextEditingController(text: tasks[index]['subject']);
     String? newSubject = await showDialog<String>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit Task Subject', style: TextStyle(color: Colors.black)),
+          title: const Text('Edit Reminder', style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.white,
           content: TextField(
             controller: controller,
-            decoration: const InputDecoration(hintText: "Enter new task subject"),
+            decoration: const InputDecoration(hintText: "Enter new reminder"),
             style: const TextStyle(color: Colors.black),
           ),
           actions: [
@@ -263,7 +252,7 @@ Widget _bottomNavBar(){
   Widget _buildTaskSubject(int index, Map<String, String> task) {
     return Expanded(
       child: GestureDetector(
-        onTap: () => _editTaskSubject(index),
+        onTap: () => _editReminder(index),
         child: Text(
           task['subject']!,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
@@ -286,7 +275,7 @@ Widget _bottomNavBar(){
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(onPressed: () => _editTaskSubject(index), icon: const Icon(Icons.edit, color: Colors.black)),
+        IconButton(onPressed: () => _editReminder(index), icon: const Icon(Icons.edit, color: Colors.black)),
         IconButton(onPressed: () => _deleteTask(index), icon: const Icon(Icons.delete, color: Colors.black)),
       ],
     );
