@@ -42,7 +42,7 @@ Once that is completed all DB queries are secured through Cloud SQL Auth Proxy
     4. make sure there are no illegal characters in your BD password
         - Here are some illegal characters that caused me issues Semicolon, Left curly brackets, Right curly bracket, Equal sign, Double curly brackets 
     5. npx prisma db pull if the DB is already setup or you can use npx prisma generate once the db is setup
-    6. change the provider int eh schema file to   provider = "dart run orm"
+    6. change the provider in the schema file to the provider = "dart run orm"
     7. 
 ## Notes
 

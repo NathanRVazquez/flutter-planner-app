@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dart_frog/dart_frog.dart';
 import 'package:orm/orm.dart';
 // import the prisam client so prisma functions can run
@@ -55,28 +57,54 @@ Future<Response> _createUser(RequestContext context)async{
   try{
     //assign the name, email, password, username and timezone  of the user
     //as data-type casts the dynamic into the data-type of the attribute
-  final name = json['name'] as String;
-  final email = json ['email'] as String;
-  final password = json['password'] as String;
-  final username = json['username'] as String;
-  final userTimezone = json ['userTimeZone']as int;
-  // empty names, username, emails or passwords are not allowed and throw a format exception
-  if (username=='' || password==''|| email=='' || name==''){
-    // function catched format exceptions and lets user know about error
-    // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
-    throw const FormatException();
-  }
-  // if the values are not null, then prisma will try to create the user 
-  await prisma.users.create(
-    data: PrismaUnion.$1(UsersCreateInput(
-      username: username,
-      name: name,
-      email: email.toLowerCase(),
-      password: password,
-      userTimezone: userTimezone,
+    final name = json['name'] as String;
+    final email = json ['email'] as String;
+    final password = json['password'] as String;
+    final username = json['username'] as String;
+    final userTimezone = json ['userTimeZone']as int;
+    // empty names, username, emails or passwords are not allowed and throw a format exception
+    if (username=='' || password==''|| email=='' || name==''){
+      // function catched format exceptions and lets user know about error
+      // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
+      throw const FormatException();
+    }
+    // if the values are not null, then prisma will try to create the user 
+    await prisma.users.create(
+      data: PrismaUnion.$1(UsersCreateInput(
+        username: username,
+        name: name,
+        email: email.toLowerCase(),
+        password: password,
+        userTimezone: userTimezone,
+        joinDate: PrismaUnion.$1(DateTime.now()),
 
-    ),),
-  );
+      ),),
+    );
+    
+    final user = await prisma.users.findFirst(
+      where: UsersWhereInput(
+        email: PrismaUnion.$1(
+          StringFilter(contains: PrismaUnion.$1(email)),
+        ),
+      ),
+    );
+
+    //if no user is found throw an error
+    if (user==null){
+      // no user found, throw error
+      throw Exception('user not found/ incorrect email');
+    }
+  
+    await prisma.todoLists.create(
+      data: PrismaUnion.$1(TodoListsCreateInput(
+        users: UsersCreateNestedOneWithoutTodoListsInput(
+          connect: UsersWhereUniqueInput(
+            userId: user.userId,
+          ),
+        ),
+        listId: Random().nextInt(10000) +1,
+      ),),
+    );
   //  as  a security measure I need to add hashing for the passwords. 
   // I will comeback and add this if I have time
   // if the transaction is successfull the user is created and the details are displayed

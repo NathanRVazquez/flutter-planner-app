@@ -2149,7 +2149,7 @@ class TasksDelegate {
     );
   }
 
-  _i1.ActionClient<Iterable<_i2.Tasks>> findMany({
+  _i1.ActionClient<Iterable<_i2.Tasks>> findMany(Map<dynamic, Object> map, {
     _i3.TasksWhereInput? where,
     _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
             _i3.TasksOrderByWithRelationInput>?

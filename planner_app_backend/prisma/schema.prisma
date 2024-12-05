@@ -1,12 +1,15 @@
 generator client {
   provider = "dart run orm"
+  // output   = "../lib/src/prisma/generated"
+
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+//  all ids should hashtags
+// create date should be required
 model assignments {
   assignment_id   Int               @id @default(autoincrement())
   create_date     DateTime?         @db.Timestamp(6)
@@ -28,7 +31,7 @@ model project_members {
   assignments       assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
   users             users?      @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)
 }
-
+// create date is mandatory
 model projects {
   assignment_id Int         @unique
   complete_date DateTime?   @db.Timestamp(6)
@@ -36,7 +39,8 @@ model projects {
   assignments   assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
   tasks         tasks[]
 }
-
+// reminder category is required
+// add other to reminder category
 model reminders {
   assignment_id     Int                @unique
   reminder_category reminder_category?
@@ -48,9 +52,10 @@ model tasks {
   complete_date  DateTime? @db.Timestamp(6)
   completed      Boolean
   parent_project Int?
+  // assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
   projects       projects? @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
 }
-
+// list_id should auto increment like user id
 model todo_lists {
   user_id     Int
   list_id     Int           @id
