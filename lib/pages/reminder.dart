@@ -4,7 +4,6 @@ import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/home.dart';
 import 'package:planner_app/pages/support.dart';
 import 'package:planner_app/pages/task.dart';
-// import 'package:planner_app/pages/project.dart';
 
 class ReminderPage extends StatefulWidget {
   const ReminderPage({super.key});
