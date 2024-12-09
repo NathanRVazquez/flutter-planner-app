@@ -18,7 +18,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context){
-    final List<String> names = ["Alvi Aziz", "Xiaomin Chen", "Nathan Vasquez", "Usman Sheikh"];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _topAppBar(),
