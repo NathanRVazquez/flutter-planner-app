@@ -6,6 +6,499 @@ import 'package:orm/orm.dart' as _i1;
 import 'model.dart' as _i2;
 import 'prisma.dart' as _i3;
 
+class UsersDelegate {
+  const UsersDelegate._(this._client);
+
+  final PrismaClient _client;
+
+  _i1.ActionClient<_i2.Users?> findUnique({
+    required _i3.UsersWhereUniqueInput where,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.findUnique,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users?>(
+      action: 'findUniqueusers',
+      result: result,
+      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Users> findUniqueOrThrow({
+    required _i3.UsersWhereUniqueInput where,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.findUniqueOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users>(
+      action: 'findUniqueusersOrThrow',
+      result: result,
+      factory: (e) => _i2.Users.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Users?> findFirst({
+    _i3.UsersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
+            _i3.UsersOrderByWithRelationInput>?
+        orderBy,
+    _i3.UsersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.UsersScalar, Iterable<_i3.UsersScalar>>? distinct,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.findFirst,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users?>(
+      action: 'findFirstusers',
+      result: result,
+      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Users> findFirstOrThrow({
+    _i3.UsersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
+            _i3.UsersOrderByWithRelationInput>?
+        orderBy,
+    _i3.UsersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.UsersScalar, Iterable<_i3.UsersScalar>>? distinct,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.findFirstOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users>(
+      action: 'findFirstusersOrThrow',
+      result: result,
+      factory: (e) => _i2.Users.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.Users>> findMany({
+    _i3.UsersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
+            _i3.UsersOrderByWithRelationInput>?
+        orderBy,
+    _i3.UsersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.UsersScalar, Iterable<_i3.UsersScalar>>? distinct,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.findMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.Users>>(
+      action: 'findManyusers',
+      result: result,
+      factory: (values) =>
+          (values as Iterable).map((e) => _i2.Users.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Users> create({
+    required _i1
+        .PrismaUnion<_i3.UsersCreateInput, _i3.UsersUncheckedCreateInput>
+        data,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.createOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users>(
+      action: 'createOneusers',
+      result: result,
+      factory: (e) => _i2.Users.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
+    required _i1.PrismaUnion<_i3.UsersCreateManyInput,
+            Iterable<_i3.UsersCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.createMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'createManyusers',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.CreateManyusersAndReturnOutputType>>
+      createManyAndReturn({
+    required _i1.PrismaUnion<_i3.UsersCreateManyInput,
+            Iterable<_i3.UsersCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+    _i3.CreateManyusersAndReturnOutputTypeSelect? select,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+      'select': select,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.createManyAndReturn,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.CreateManyusersAndReturnOutputType>>(
+      action: 'createManyusersAndReturn',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i2.CreateManyusersAndReturnOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Users?> update({
+    required _i1
+        .PrismaUnion<_i3.UsersUpdateInput, _i3.UsersUncheckedUpdateInput>
+        data,
+    required _i3.UsersWhereUniqueInput where,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.updateOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users?>(
+      action: 'updateOneusers',
+      result: result,
+      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
+    required _i1.PrismaUnion<_i3.UsersUpdateManyMutationInput,
+            _i3.UsersUncheckedUpdateManyInput>
+        data,
+    _i3.UsersWhereInput? where,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.updateMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'updateManyusers',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Users> upsert({
+    required _i3.UsersWhereUniqueInput where,
+    required _i1
+        .PrismaUnion<_i3.UsersCreateInput, _i3.UsersUncheckedCreateInput>
+        create,
+    required _i1
+        .PrismaUnion<_i3.UsersUpdateInput, _i3.UsersUncheckedUpdateInput>
+        update,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'create': create,
+      'update': update,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.upsertOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users>(
+      action: 'upsertOneusers',
+      result: result,
+      factory: (e) => _i2.Users.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Users?> delete({
+    required _i3.UsersWhereUniqueInput where,
+    _i3.UsersSelect? select,
+    _i3.UsersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.deleteOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Users?>(
+      action: 'deleteOneusers',
+      result: result,
+      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
+      {_i3.UsersWhereInput? where}) {
+    final args = {'where': where};
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.deleteMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'deleteManyusers',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i3.UsersGroupByOutputType>> groupBy({
+    _i3.UsersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithAggregationInput>,
+            _i3.UsersOrderByWithAggregationInput>?
+        orderBy,
+    required _i1.PrismaUnion<Iterable<_i3.UsersScalar>, _i3.UsersScalar> by,
+    _i3.UsersScalarWhereWithAggregatesInput? having,
+    int? take,
+    int? skip,
+    _i3.UsersGroupByOutputTypeSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'by': _i1.JsonQuery.groupBySerializer(by),
+      'having': having,
+      'take': take,
+      'skip': skip,
+      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.groupBy,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i3.UsersGroupByOutputType>>(
+      action: 'groupByusers',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i3.UsersGroupByOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i3.AggregateUsers> aggregate({
+    _i3.UsersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
+            _i3.UsersOrderByWithRelationInput>?
+        orderBy,
+    _i3.UsersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i3.AggregateUsersSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'select': select,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'users',
+      action: _i1.JsonQueryAction.aggregate,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AggregateUsers>(
+      action: 'aggregateusers',
+      result: result,
+      factory: (e) => _i3.AggregateUsers.fromJson(e),
+    );
+  }
+}
+
 class AssignmentsDelegate {
   const AssignmentsDelegate._(this._client);
 
@@ -503,6 +996,1498 @@ class AssignmentsDelegate {
       action: 'aggregateassignments',
       result: result,
       factory: (e) => _i3.AggregateAssignments.fromJson(e),
+    );
+  }
+}
+
+class TasksDelegate {
+  const TasksDelegate._(this._client);
+
+  final PrismaClient _client;
+
+  _i1.ActionClient<_i2.Tasks?> findUnique({
+    required _i3.TasksWhereUniqueInput where,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.findUnique,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks?>(
+      action: 'findUniquetasks',
+      result: result,
+      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks> findUniqueOrThrow({
+    required _i3.TasksWhereUniqueInput where,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.findUniqueOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks>(
+      action: 'findUniquetasksOrThrow',
+      result: result,
+      factory: (e) => _i2.Tasks.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks?> findFirst({
+    _i3.TasksWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
+            _i3.TasksOrderByWithRelationInput>?
+        orderBy,
+    _i3.TasksWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.TasksScalar, Iterable<_i3.TasksScalar>>? distinct,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.findFirst,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks?>(
+      action: 'findFirsttasks',
+      result: result,
+      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks> findFirstOrThrow({
+    _i3.TasksWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
+            _i3.TasksOrderByWithRelationInput>?
+        orderBy,
+    _i3.TasksWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.TasksScalar, Iterable<_i3.TasksScalar>>? distinct,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.findFirstOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks>(
+      action: 'findFirsttasksOrThrow',
+      result: result,
+      factory: (e) => _i2.Tasks.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.Tasks>> findMany({
+    _i3.TasksWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
+            _i3.TasksOrderByWithRelationInput>?
+        orderBy,
+    _i3.TasksWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.TasksScalar, Iterable<_i3.TasksScalar>>? distinct,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.findMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.Tasks>>(
+      action: 'findManytasks',
+      result: result,
+      factory: (values) =>
+          (values as Iterable).map((e) => _i2.Tasks.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks> create({
+    required _i1
+        .PrismaUnion<_i3.TasksCreateInput, _i3.TasksUncheckedCreateInput>
+        data,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.createOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks>(
+      action: 'createOnetasks',
+      result: result,
+      factory: (e) => _i2.Tasks.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
+    required _i1.PrismaUnion<_i3.TasksCreateManyInput,
+            Iterable<_i3.TasksCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.createMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'createManytasks',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.CreateManytasksAndReturnOutputType>>
+      createManyAndReturn({
+    required _i1.PrismaUnion<_i3.TasksCreateManyInput,
+            Iterable<_i3.TasksCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+    _i3.CreateManytasksAndReturnOutputTypeSelect? select,
+    _i3.CreateManytasksAndReturnOutputTypeInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.createManyAndReturn,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.CreateManytasksAndReturnOutputType>>(
+      action: 'createManytasksAndReturn',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i2.CreateManytasksAndReturnOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks?> update({
+    required _i1
+        .PrismaUnion<_i3.TasksUpdateInput, _i3.TasksUncheckedUpdateInput>
+        data,
+    required _i3.TasksWhereUniqueInput where,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.updateOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks?>(
+      action: 'updateOnetasks',
+      result: result,
+      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
+    required _i1.PrismaUnion<_i3.TasksUpdateManyMutationInput,
+            _i3.TasksUncheckedUpdateManyInput>
+        data,
+    _i3.TasksWhereInput? where,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.updateMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'updateManytasks',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks> upsert({
+    required _i3.TasksWhereUniqueInput where,
+    required _i1
+        .PrismaUnion<_i3.TasksCreateInput, _i3.TasksUncheckedCreateInput>
+        create,
+    required _i1
+        .PrismaUnion<_i3.TasksUpdateInput, _i3.TasksUncheckedUpdateInput>
+        update,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'create': create,
+      'update': update,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.upsertOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks>(
+      action: 'upsertOnetasks',
+      result: result,
+      factory: (e) => _i2.Tasks.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Tasks?> delete({
+    required _i3.TasksWhereUniqueInput where,
+    _i3.TasksSelect? select,
+    _i3.TasksInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.deleteOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Tasks?>(
+      action: 'deleteOnetasks',
+      result: result,
+      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
+      {_i3.TasksWhereInput? where}) {
+    final args = {'where': where};
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.deleteMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'deleteManytasks',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i3.TasksGroupByOutputType>> groupBy({
+    _i3.TasksWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithAggregationInput>,
+            _i3.TasksOrderByWithAggregationInput>?
+        orderBy,
+    required _i1.PrismaUnion<Iterable<_i3.TasksScalar>, _i3.TasksScalar> by,
+    _i3.TasksScalarWhereWithAggregatesInput? having,
+    int? take,
+    int? skip,
+    _i3.TasksGroupByOutputTypeSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'by': _i1.JsonQuery.groupBySerializer(by),
+      'having': having,
+      'take': take,
+      'skip': skip,
+      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.groupBy,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i3.TasksGroupByOutputType>>(
+      action: 'groupBytasks',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i3.TasksGroupByOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i3.AggregateTasks> aggregate({
+    _i3.TasksWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
+            _i3.TasksOrderByWithRelationInput>?
+        orderBy,
+    _i3.TasksWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i3.AggregateTasksSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'select': select,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'tasks',
+      action: _i1.JsonQueryAction.aggregate,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AggregateTasks>(
+      action: 'aggregatetasks',
+      result: result,
+      factory: (e) => _i3.AggregateTasks.fromJson(e),
+    );
+  }
+}
+
+class RemindersDelegate {
+  const RemindersDelegate._(this._client);
+
+  final PrismaClient _client;
+
+  _i1.ActionClient<_i2.Reminders?> findUnique({
+    required _i3.RemindersWhereUniqueInput where,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.findUnique,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders?>(
+      action: 'findUniquereminders',
+      result: result,
+      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders> findUniqueOrThrow({
+    required _i3.RemindersWhereUniqueInput where,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.findUniqueOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders>(
+      action: 'findUniqueremindersOrThrow',
+      result: result,
+      factory: (e) => _i2.Reminders.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders?> findFirst({
+    _i3.RemindersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
+            _i3.RemindersOrderByWithRelationInput>?
+        orderBy,
+    _i3.RemindersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.RemindersScalar, Iterable<_i3.RemindersScalar>>?
+        distinct,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.findFirst,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders?>(
+      action: 'findFirstreminders',
+      result: result,
+      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders> findFirstOrThrow({
+    _i3.RemindersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
+            _i3.RemindersOrderByWithRelationInput>?
+        orderBy,
+    _i3.RemindersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.RemindersScalar, Iterable<_i3.RemindersScalar>>?
+        distinct,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.findFirstOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders>(
+      action: 'findFirstremindersOrThrow',
+      result: result,
+      factory: (e) => _i2.Reminders.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.Reminders>> findMany({
+    _i3.RemindersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
+            _i3.RemindersOrderByWithRelationInput>?
+        orderBy,
+    _i3.RemindersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.RemindersScalar, Iterable<_i3.RemindersScalar>>?
+        distinct,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.findMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.Reminders>>(
+      action: 'findManyreminders',
+      result: result,
+      factory: (values) =>
+          (values as Iterable).map((e) => _i2.Reminders.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders> create({
+    required _i1.PrismaUnion<_i3.RemindersCreateInput,
+            _i3.RemindersUncheckedCreateInput>
+        data,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.createOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders>(
+      action: 'createOnereminders',
+      result: result,
+      factory: (e) => _i2.Reminders.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
+    required _i1.PrismaUnion<_i3.RemindersCreateManyInput,
+            Iterable<_i3.RemindersCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.createMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'createManyreminders',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.CreateManyremindersAndReturnOutputType>>
+      createManyAndReturn({
+    required _i1.PrismaUnion<_i3.RemindersCreateManyInput,
+            Iterable<_i3.RemindersCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+    _i3.CreateManyremindersAndReturnOutputTypeSelect? select,
+    _i3.CreateManyremindersAndReturnOutputTypeInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.createManyAndReturn,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<
+        Iterable<_i2.CreateManyremindersAndReturnOutputType>>(
+      action: 'createManyremindersAndReturn',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i2.CreateManyremindersAndReturnOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders?> update({
+    required _i1.PrismaUnion<_i3.RemindersUpdateInput,
+            _i3.RemindersUncheckedUpdateInput>
+        data,
+    required _i3.RemindersWhereUniqueInput where,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.updateOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders?>(
+      action: 'updateOnereminders',
+      result: result,
+      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
+    required _i1.PrismaUnion<_i3.RemindersUpdateManyMutationInput,
+            _i3.RemindersUncheckedUpdateManyInput>
+        data,
+    _i3.RemindersWhereInput? where,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.updateMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'updateManyreminders',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders> upsert({
+    required _i3.RemindersWhereUniqueInput where,
+    required _i1.PrismaUnion<_i3.RemindersCreateInput,
+            _i3.RemindersUncheckedCreateInput>
+        create,
+    required _i1.PrismaUnion<_i3.RemindersUpdateInput,
+            _i3.RemindersUncheckedUpdateInput>
+        update,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'create': create,
+      'update': update,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.upsertOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders>(
+      action: 'upsertOnereminders',
+      result: result,
+      factory: (e) => _i2.Reminders.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Reminders?> delete({
+    required _i3.RemindersWhereUniqueInput where,
+    _i3.RemindersSelect? select,
+    _i3.RemindersInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.deleteOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Reminders?>(
+      action: 'deleteOnereminders',
+      result: result,
+      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
+      {_i3.RemindersWhereInput? where}) {
+    final args = {'where': where};
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.deleteMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'deleteManyreminders',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i3.RemindersGroupByOutputType>> groupBy({
+    _i3.RemindersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithAggregationInput>,
+            _i3.RemindersOrderByWithAggregationInput>?
+        orderBy,
+    required _i1.PrismaUnion<Iterable<_i3.RemindersScalar>, _i3.RemindersScalar>
+        by,
+    _i3.RemindersScalarWhereWithAggregatesInput? having,
+    int? take,
+    int? skip,
+    _i3.RemindersGroupByOutputTypeSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'by': _i1.JsonQuery.groupBySerializer(by),
+      'having': having,
+      'take': take,
+      'skip': skip,
+      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.groupBy,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i3.RemindersGroupByOutputType>>(
+      action: 'groupByreminders',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i3.RemindersGroupByOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i3.AggregateReminders> aggregate({
+    _i3.RemindersWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
+            _i3.RemindersOrderByWithRelationInput>?
+        orderBy,
+    _i3.RemindersWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i3.AggregateRemindersSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'select': select,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'reminders',
+      action: _i1.JsonQueryAction.aggregate,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AggregateReminders>(
+      action: 'aggregatereminders',
+      result: result,
+      factory: (e) => _i3.AggregateReminders.fromJson(e),
+    );
+  }
+}
+
+class ProjectsDelegate {
+  const ProjectsDelegate._(this._client);
+
+  final PrismaClient _client;
+
+  _i1.ActionClient<_i2.Projects?> findUnique({
+    required _i3.ProjectsWhereUniqueInput where,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.findUnique,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects?>(
+      action: 'findUniqueprojects',
+      result: result,
+      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects> findUniqueOrThrow({
+    required _i3.ProjectsWhereUniqueInput where,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.findUniqueOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects>(
+      action: 'findUniqueprojectsOrThrow',
+      result: result,
+      factory: (e) => _i2.Projects.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects?> findFirst({
+    _i3.ProjectsWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
+            _i3.ProjectsOrderByWithRelationInput>?
+        orderBy,
+    _i3.ProjectsWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.ProjectsScalar, Iterable<_i3.ProjectsScalar>>? distinct,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.findFirst,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects?>(
+      action: 'findFirstprojects',
+      result: result,
+      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects> findFirstOrThrow({
+    _i3.ProjectsWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
+            _i3.ProjectsOrderByWithRelationInput>?
+        orderBy,
+    _i3.ProjectsWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.ProjectsScalar, Iterable<_i3.ProjectsScalar>>? distinct,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.findFirstOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects>(
+      action: 'findFirstprojectsOrThrow',
+      result: result,
+      factory: (e) => _i2.Projects.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.Projects>> findMany({
+    _i3.ProjectsWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
+            _i3.ProjectsOrderByWithRelationInput>?
+        orderBy,
+    _i3.ProjectsWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.ProjectsScalar, Iterable<_i3.ProjectsScalar>>? distinct,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.findMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.Projects>>(
+      action: 'findManyprojects',
+      result: result,
+      factory: (values) =>
+          (values as Iterable).map((e) => _i2.Projects.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects> create({
+    required _i1
+        .PrismaUnion<_i3.ProjectsCreateInput, _i3.ProjectsUncheckedCreateInput>
+        data,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.createOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects>(
+      action: 'createOneprojects',
+      result: result,
+      factory: (e) => _i2.Projects.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
+    required _i1.PrismaUnion<_i3.ProjectsCreateManyInput,
+            Iterable<_i3.ProjectsCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.createMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'createManyprojects',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.CreateManyprojectsAndReturnOutputType>>
+      createManyAndReturn({
+    required _i1.PrismaUnion<_i3.ProjectsCreateManyInput,
+            Iterable<_i3.ProjectsCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+    _i3.CreateManyprojectsAndReturnOutputTypeSelect? select,
+    _i3.CreateManyprojectsAndReturnOutputTypeInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.createManyAndReturn,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<
+        Iterable<_i2.CreateManyprojectsAndReturnOutputType>>(
+      action: 'createManyprojectsAndReturn',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i2.CreateManyprojectsAndReturnOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects?> update({
+    required _i1
+        .PrismaUnion<_i3.ProjectsUpdateInput, _i3.ProjectsUncheckedUpdateInput>
+        data,
+    required _i3.ProjectsWhereUniqueInput where,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.updateOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects?>(
+      action: 'updateOneprojects',
+      result: result,
+      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
+    required _i1.PrismaUnion<_i3.ProjectsUpdateManyMutationInput,
+            _i3.ProjectsUncheckedUpdateManyInput>
+        data,
+    _i3.ProjectsWhereInput? where,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.updateMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'updateManyprojects',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects> upsert({
+    required _i3.ProjectsWhereUniqueInput where,
+    required _i1
+        .PrismaUnion<_i3.ProjectsCreateInput, _i3.ProjectsUncheckedCreateInput>
+        create,
+    required _i1
+        .PrismaUnion<_i3.ProjectsUpdateInput, _i3.ProjectsUncheckedUpdateInput>
+        update,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'create': create,
+      'update': update,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.upsertOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects>(
+      action: 'upsertOneprojects',
+      result: result,
+      factory: (e) => _i2.Projects.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.Projects?> delete({
+    required _i3.ProjectsWhereUniqueInput where,
+    _i3.ProjectsSelect? select,
+    _i3.ProjectsInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.deleteOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.Projects?>(
+      action: 'deleteOneprojects',
+      result: result,
+      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
+      {_i3.ProjectsWhereInput? where}) {
+    final args = {'where': where};
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.deleteMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'deleteManyprojects',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i3.ProjectsGroupByOutputType>> groupBy({
+    _i3.ProjectsWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithAggregationInput>,
+            _i3.ProjectsOrderByWithAggregationInput>?
+        orderBy,
+    required _i1.PrismaUnion<Iterable<_i3.ProjectsScalar>, _i3.ProjectsScalar>
+        by,
+    _i3.ProjectsScalarWhereWithAggregatesInput? having,
+    int? take,
+    int? skip,
+    _i3.ProjectsGroupByOutputTypeSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'by': _i1.JsonQuery.groupBySerializer(by),
+      'having': having,
+      'take': take,
+      'skip': skip,
+      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.groupBy,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i3.ProjectsGroupByOutputType>>(
+      action: 'groupByprojects',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i3.ProjectsGroupByOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i3.AggregateProjects> aggregate({
+    _i3.ProjectsWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
+            _i3.ProjectsOrderByWithRelationInput>?
+        orderBy,
+    _i3.ProjectsWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i3.AggregateProjectsSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'select': select,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'projects',
+      action: _i1.JsonQueryAction.aggregate,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AggregateProjects>(
+      action: 'aggregateprojects',
+      result: result,
+      factory: (e) => _i3.AggregateProjects.fromJson(e),
     );
   }
 }
@@ -1011,2491 +2996,6 @@ class ProjectMembersDelegate {
   }
 }
 
-class ProjectsDelegate {
-  const ProjectsDelegate._(this._client);
-
-  final PrismaClient _client;
-
-  _i1.ActionClient<_i2.Projects?> findUnique({
-    required _i3.ProjectsWhereUniqueInput where,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.findUnique,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects?>(
-      action: 'findUniqueprojects',
-      result: result,
-      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects> findUniqueOrThrow({
-    required _i3.ProjectsWhereUniqueInput where,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.findUniqueOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects>(
-      action: 'findUniqueprojectsOrThrow',
-      result: result,
-      factory: (e) => _i2.Projects.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects?> findFirst({
-    _i3.ProjectsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
-            _i3.ProjectsOrderByWithRelationInput>?
-        orderBy,
-    _i3.ProjectsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.ProjectsScalar, Iterable<_i3.ProjectsScalar>>? distinct,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.findFirst,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects?>(
-      action: 'findFirstprojects',
-      result: result,
-      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects> findFirstOrThrow({
-    _i3.ProjectsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
-            _i3.ProjectsOrderByWithRelationInput>?
-        orderBy,
-    _i3.ProjectsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.ProjectsScalar, Iterable<_i3.ProjectsScalar>>? distinct,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.findFirstOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects>(
-      action: 'findFirstprojectsOrThrow',
-      result: result,
-      factory: (e) => _i2.Projects.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.Projects>> findMany({
-    _i3.ProjectsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
-            _i3.ProjectsOrderByWithRelationInput>?
-        orderBy,
-    _i3.ProjectsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.ProjectsScalar, Iterable<_i3.ProjectsScalar>>? distinct,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.findMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.Projects>>(
-      action: 'findManyprojects',
-      result: result,
-      factory: (values) =>
-          (values as Iterable).map((e) => _i2.Projects.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects> create({
-    required _i1
-        .PrismaUnion<_i3.ProjectsCreateInput, _i3.ProjectsUncheckedCreateInput>
-        data,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.createOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects>(
-      action: 'createOneprojects',
-      result: result,
-      factory: (e) => _i2.Projects.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
-    required _i1.PrismaUnion<_i3.ProjectsCreateManyInput,
-            Iterable<_i3.ProjectsCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.createMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'createManyprojects',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.CreateManyprojectsAndReturnOutputType>>
-      createManyAndReturn({
-    required _i1.PrismaUnion<_i3.ProjectsCreateManyInput,
-            Iterable<_i3.ProjectsCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-    _i3.CreateManyprojectsAndReturnOutputTypeSelect? select,
-    _i3.CreateManyprojectsAndReturnOutputTypeInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.createManyAndReturn,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<
-        Iterable<_i2.CreateManyprojectsAndReturnOutputType>>(
-      action: 'createManyprojectsAndReturn',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i2.CreateManyprojectsAndReturnOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects?> update({
-    required _i1
-        .PrismaUnion<_i3.ProjectsUpdateInput, _i3.ProjectsUncheckedUpdateInput>
-        data,
-    required _i3.ProjectsWhereUniqueInput where,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.updateOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects?>(
-      action: 'updateOneprojects',
-      result: result,
-      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
-    required _i1.PrismaUnion<_i3.ProjectsUpdateManyMutationInput,
-            _i3.ProjectsUncheckedUpdateManyInput>
-        data,
-    _i3.ProjectsWhereInput? where,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.updateMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'updateManyprojects',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects> upsert({
-    required _i3.ProjectsWhereUniqueInput where,
-    required _i1
-        .PrismaUnion<_i3.ProjectsCreateInput, _i3.ProjectsUncheckedCreateInput>
-        create,
-    required _i1
-        .PrismaUnion<_i3.ProjectsUpdateInput, _i3.ProjectsUncheckedUpdateInput>
-        update,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'create': create,
-      'update': update,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.upsertOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects>(
-      action: 'upsertOneprojects',
-      result: result,
-      factory: (e) => _i2.Projects.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Projects?> delete({
-    required _i3.ProjectsWhereUniqueInput where,
-    _i3.ProjectsSelect? select,
-    _i3.ProjectsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.deleteOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Projects?>(
-      action: 'deleteOneprojects',
-      result: result,
-      factory: (e) => e != null ? _i2.Projects.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
-      {_i3.ProjectsWhereInput? where}) {
-    final args = {'where': where};
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.deleteMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'deleteManyprojects',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i3.ProjectsGroupByOutputType>> groupBy({
-    _i3.ProjectsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithAggregationInput>,
-            _i3.ProjectsOrderByWithAggregationInput>?
-        orderBy,
-    required _i1.PrismaUnion<Iterable<_i3.ProjectsScalar>, _i3.ProjectsScalar>
-        by,
-    _i3.ProjectsScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-    _i3.ProjectsGroupByOutputTypeSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'by': _i1.JsonQuery.groupBySerializer(by),
-      'having': having,
-      'take': take,
-      'skip': skip,
-      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.groupBy,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i3.ProjectsGroupByOutputType>>(
-      action: 'groupByprojects',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i3.ProjectsGroupByOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i3.AggregateProjects> aggregate({
-    _i3.ProjectsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.ProjectsOrderByWithRelationInput>,
-            _i3.ProjectsOrderByWithRelationInput>?
-        orderBy,
-    _i3.ProjectsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i3.AggregateProjectsSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'select': select,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'projects',
-      action: _i1.JsonQueryAction.aggregate,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AggregateProjects>(
-      action: 'aggregateprojects',
-      result: result,
-      factory: (e) => _i3.AggregateProjects.fromJson(e),
-    );
-  }
-}
-
-class RemindersDelegate {
-  const RemindersDelegate._(this._client);
-
-  final PrismaClient _client;
-
-  _i1.ActionClient<_i2.Reminders?> findUnique({
-    required _i3.RemindersWhereUniqueInput where,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.findUnique,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders?>(
-      action: 'findUniquereminders',
-      result: result,
-      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders> findUniqueOrThrow({
-    required _i3.RemindersWhereUniqueInput where,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.findUniqueOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders>(
-      action: 'findUniqueremindersOrThrow',
-      result: result,
-      factory: (e) => _i2.Reminders.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders?> findFirst({
-    _i3.RemindersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
-            _i3.RemindersOrderByWithRelationInput>?
-        orderBy,
-    _i3.RemindersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.RemindersScalar, Iterable<_i3.RemindersScalar>>?
-        distinct,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.findFirst,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders?>(
-      action: 'findFirstreminders',
-      result: result,
-      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders> findFirstOrThrow({
-    _i3.RemindersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
-            _i3.RemindersOrderByWithRelationInput>?
-        orderBy,
-    _i3.RemindersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.RemindersScalar, Iterable<_i3.RemindersScalar>>?
-        distinct,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.findFirstOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders>(
-      action: 'findFirstremindersOrThrow',
-      result: result,
-      factory: (e) => _i2.Reminders.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.Reminders>> findMany({
-    _i3.RemindersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
-            _i3.RemindersOrderByWithRelationInput>?
-        orderBy,
-    _i3.RemindersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.RemindersScalar, Iterable<_i3.RemindersScalar>>?
-        distinct,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.findMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.Reminders>>(
-      action: 'findManyreminders',
-      result: result,
-      factory: (values) =>
-          (values as Iterable).map((e) => _i2.Reminders.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders> create({
-    required _i1.PrismaUnion<_i3.RemindersCreateInput,
-            _i3.RemindersUncheckedCreateInput>
-        data,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.createOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders>(
-      action: 'createOnereminders',
-      result: result,
-      factory: (e) => _i2.Reminders.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
-    required _i1.PrismaUnion<_i3.RemindersCreateManyInput,
-            Iterable<_i3.RemindersCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.createMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'createManyreminders',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.CreateManyremindersAndReturnOutputType>>
-      createManyAndReturn({
-    required _i1.PrismaUnion<_i3.RemindersCreateManyInput,
-            Iterable<_i3.RemindersCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-    _i3.CreateManyremindersAndReturnOutputTypeSelect? select,
-    _i3.CreateManyremindersAndReturnOutputTypeInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.createManyAndReturn,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<
-        Iterable<_i2.CreateManyremindersAndReturnOutputType>>(
-      action: 'createManyremindersAndReturn',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i2.CreateManyremindersAndReturnOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders?> update({
-    required _i1.PrismaUnion<_i3.RemindersUpdateInput,
-            _i3.RemindersUncheckedUpdateInput>
-        data,
-    required _i3.RemindersWhereUniqueInput where,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.updateOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders?>(
-      action: 'updateOnereminders',
-      result: result,
-      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
-    required _i1.PrismaUnion<_i3.RemindersUpdateManyMutationInput,
-            _i3.RemindersUncheckedUpdateManyInput>
-        data,
-    _i3.RemindersWhereInput? where,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.updateMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'updateManyreminders',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders> upsert({
-    required _i3.RemindersWhereUniqueInput where,
-    required _i1.PrismaUnion<_i3.RemindersCreateInput,
-            _i3.RemindersUncheckedCreateInput>
-        create,
-    required _i1.PrismaUnion<_i3.RemindersUpdateInput,
-            _i3.RemindersUncheckedUpdateInput>
-        update,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'create': create,
-      'update': update,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.upsertOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders>(
-      action: 'upsertOnereminders',
-      result: result,
-      factory: (e) => _i2.Reminders.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Reminders?> delete({
-    required _i3.RemindersWhereUniqueInput where,
-    _i3.RemindersSelect? select,
-    _i3.RemindersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.deleteOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Reminders?>(
-      action: 'deleteOnereminders',
-      result: result,
-      factory: (e) => e != null ? _i2.Reminders.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
-      {_i3.RemindersWhereInput? where}) {
-    final args = {'where': where};
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.deleteMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'deleteManyreminders',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i3.RemindersGroupByOutputType>> groupBy({
-    _i3.RemindersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithAggregationInput>,
-            _i3.RemindersOrderByWithAggregationInput>?
-        orderBy,
-    required _i1.PrismaUnion<Iterable<_i3.RemindersScalar>, _i3.RemindersScalar>
-        by,
-    _i3.RemindersScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-    _i3.RemindersGroupByOutputTypeSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'by': _i1.JsonQuery.groupBySerializer(by),
-      'having': having,
-      'take': take,
-      'skip': skip,
-      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.groupBy,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i3.RemindersGroupByOutputType>>(
-      action: 'groupByreminders',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i3.RemindersGroupByOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i3.AggregateReminders> aggregate({
-    _i3.RemindersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.RemindersOrderByWithRelationInput>,
-            _i3.RemindersOrderByWithRelationInput>?
-        orderBy,
-    _i3.RemindersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i3.AggregateRemindersSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'select': select,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'reminders',
-      action: _i1.JsonQueryAction.aggregate,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AggregateReminders>(
-      action: 'aggregatereminders',
-      result: result,
-      factory: (e) => _i3.AggregateReminders.fromJson(e),
-    );
-  }
-}
-
-class TasksDelegate {
-  const TasksDelegate._(this._client);
-
-  final PrismaClient _client;
-
-  _i1.ActionClient<_i2.Tasks?> findUnique({
-    required _i3.TasksWhereUniqueInput where,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.findUnique,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks?>(
-      action: 'findUniquetasks',
-      result: result,
-      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks> findUniqueOrThrow({
-    required _i3.TasksWhereUniqueInput where,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.findUniqueOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks>(
-      action: 'findUniquetasksOrThrow',
-      result: result,
-      factory: (e) => _i2.Tasks.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks?> findFirst({
-    _i3.TasksWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
-            _i3.TasksOrderByWithRelationInput>?
-        orderBy,
-    _i3.TasksWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.TasksScalar, Iterable<_i3.TasksScalar>>? distinct,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.findFirst,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks?>(
-      action: 'findFirsttasks',
-      result: result,
-      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks> findFirstOrThrow({
-    _i3.TasksWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
-            _i3.TasksOrderByWithRelationInput>?
-        orderBy,
-    _i3.TasksWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.TasksScalar, Iterable<_i3.TasksScalar>>? distinct,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.findFirstOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks>(
-      action: 'findFirsttasksOrThrow',
-      result: result,
-      factory: (e) => _i2.Tasks.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.Tasks>> findMany(Map<dynamic, Object> map, {
-    _i3.TasksWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
-            _i3.TasksOrderByWithRelationInput>?
-        orderBy,
-    _i3.TasksWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.TasksScalar, Iterable<_i3.TasksScalar>>? distinct,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.findMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.Tasks>>(
-      action: 'findManytasks',
-      result: result,
-      factory: (values) =>
-          (values as Iterable).map((e) => _i2.Tasks.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks> create({
-    required _i1
-        .PrismaUnion<_i3.TasksCreateInput, _i3.TasksUncheckedCreateInput>
-        data,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.createOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks>(
-      action: 'createOnetasks',
-      result: result,
-      factory: (e) => _i2.Tasks.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
-    required _i1.PrismaUnion<_i3.TasksCreateManyInput,
-            Iterable<_i3.TasksCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.createMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'createManytasks',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.CreateManytasksAndReturnOutputType>>
-      createManyAndReturn({
-    required _i1.PrismaUnion<_i3.TasksCreateManyInput,
-            Iterable<_i3.TasksCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-    _i3.CreateManytasksAndReturnOutputTypeSelect? select,
-    _i3.CreateManytasksAndReturnOutputTypeInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.createManyAndReturn,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.CreateManytasksAndReturnOutputType>>(
-      action: 'createManytasksAndReturn',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i2.CreateManytasksAndReturnOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks?> update({
-    required _i1
-        .PrismaUnion<_i3.TasksUpdateInput, _i3.TasksUncheckedUpdateInput>
-        data,
-    required _i3.TasksWhereUniqueInput where,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.updateOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks?>(
-      action: 'updateOnetasks',
-      result: result,
-      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
-    required _i1.PrismaUnion<_i3.TasksUpdateManyMutationInput,
-            _i3.TasksUncheckedUpdateManyInput>
-        data,
-    _i3.TasksWhereInput? where,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.updateMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'updateManytasks',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks> upsert({
-    required _i3.TasksWhereUniqueInput where,
-    required _i1
-        .PrismaUnion<_i3.TasksCreateInput, _i3.TasksUncheckedCreateInput>
-        create,
-    required _i1
-        .PrismaUnion<_i3.TasksUpdateInput, _i3.TasksUncheckedUpdateInput>
-        update,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'create': create,
-      'update': update,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.upsertOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks>(
-      action: 'upsertOnetasks',
-      result: result,
-      factory: (e) => _i2.Tasks.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Tasks?> delete({
-    required _i3.TasksWhereUniqueInput where,
-    _i3.TasksSelect? select,
-    _i3.TasksInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.deleteOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Tasks?>(
-      action: 'deleteOnetasks',
-      result: result,
-      factory: (e) => e != null ? _i2.Tasks.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
-      {_i3.TasksWhereInput? where}) {
-    final args = {'where': where};
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.deleteMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'deleteManytasks',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i3.TasksGroupByOutputType>> groupBy({
-    _i3.TasksWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithAggregationInput>,
-            _i3.TasksOrderByWithAggregationInput>?
-        orderBy,
-    required _i1.PrismaUnion<Iterable<_i3.TasksScalar>, _i3.TasksScalar> by,
-    _i3.TasksScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-    _i3.TasksGroupByOutputTypeSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'by': _i1.JsonQuery.groupBySerializer(by),
-      'having': having,
-      'take': take,
-      'skip': skip,
-      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.groupBy,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i3.TasksGroupByOutputType>>(
-      action: 'groupBytasks',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i3.TasksGroupByOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i3.AggregateTasks> aggregate({
-    _i3.TasksWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TasksOrderByWithRelationInput>,
-            _i3.TasksOrderByWithRelationInput>?
-        orderBy,
-    _i3.TasksWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i3.AggregateTasksSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'select': select,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'tasks',
-      action: _i1.JsonQueryAction.aggregate,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AggregateTasks>(
-      action: 'aggregatetasks',
-      result: result,
-      factory: (e) => _i3.AggregateTasks.fromJson(e),
-    );
-  }
-}
-
-class TodoListsDelegate {
-  const TodoListsDelegate._(this._client);
-
-  final PrismaClient _client;
-
-  _i1.ActionClient<_i2.TodoLists?> findUnique({
-    required _i3.TodoListsWhereUniqueInput where,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.findUnique,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists?>(
-      action: 'findUniquetodo_lists',
-      result: result,
-      factory: (e) => e != null ? _i2.TodoLists.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists> findUniqueOrThrow({
-    required _i3.TodoListsWhereUniqueInput where,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.findUniqueOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists>(
-      action: 'findUniquetodo_listsOrThrow',
-      result: result,
-      factory: (e) => _i2.TodoLists.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists?> findFirst({
-    _i3.TodoListsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TodoListsOrderByWithRelationInput>,
-            _i3.TodoListsOrderByWithRelationInput>?
-        orderBy,
-    _i3.TodoListsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.TodoListsScalar, Iterable<_i3.TodoListsScalar>>?
-        distinct,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.findFirst,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists?>(
-      action: 'findFirsttodo_lists',
-      result: result,
-      factory: (e) => e != null ? _i2.TodoLists.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists> findFirstOrThrow({
-    _i3.TodoListsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TodoListsOrderByWithRelationInput>,
-            _i3.TodoListsOrderByWithRelationInput>?
-        orderBy,
-    _i3.TodoListsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.TodoListsScalar, Iterable<_i3.TodoListsScalar>>?
-        distinct,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.findFirstOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists>(
-      action: 'findFirsttodo_listsOrThrow',
-      result: result,
-      factory: (e) => _i2.TodoLists.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.TodoLists>> findMany({
-    _i3.TodoListsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TodoListsOrderByWithRelationInput>,
-            _i3.TodoListsOrderByWithRelationInput>?
-        orderBy,
-    _i3.TodoListsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.TodoListsScalar, Iterable<_i3.TodoListsScalar>>?
-        distinct,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.findMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.TodoLists>>(
-      action: 'findManytodo_lists',
-      result: result,
-      factory: (values) =>
-          (values as Iterable).map((e) => _i2.TodoLists.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists> create({
-    required _i1.PrismaUnion<_i3.TodoListsCreateInput,
-            _i3.TodoListsUncheckedCreateInput>
-        data,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.createOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists>(
-      action: 'createOnetodo_lists',
-      result: result,
-      factory: (e) => _i2.TodoLists.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
-    required _i1.PrismaUnion<_i3.TodoListsCreateManyInput,
-            Iterable<_i3.TodoListsCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.createMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'createManytodo_lists',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.CreateManytodoListsAndReturnOutputType>>
-      createManyAndReturn({
-    required _i1.PrismaUnion<_i3.TodoListsCreateManyInput,
-            Iterable<_i3.TodoListsCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-    _i3.CreateManytodoListsAndReturnOutputTypeSelect? select,
-    _i3.CreateManytodoListsAndReturnOutputTypeInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.createManyAndReturn,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<
-        Iterable<_i2.CreateManytodoListsAndReturnOutputType>>(
-      action: 'createManytodo_listsAndReturn',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i2.CreateManytodoListsAndReturnOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists?> update({
-    required _i1.PrismaUnion<_i3.TodoListsUpdateInput,
-            _i3.TodoListsUncheckedUpdateInput>
-        data,
-    required _i3.TodoListsWhereUniqueInput where,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.updateOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists?>(
-      action: 'updateOnetodo_lists',
-      result: result,
-      factory: (e) => e != null ? _i2.TodoLists.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
-    required _i1.PrismaUnion<_i3.TodoListsUpdateManyMutationInput,
-            _i3.TodoListsUncheckedUpdateManyInput>
-        data,
-    _i3.TodoListsWhereInput? where,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.updateMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'updateManytodo_lists',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists> upsert({
-    required _i3.TodoListsWhereUniqueInput where,
-    required _i1.PrismaUnion<_i3.TodoListsCreateInput,
-            _i3.TodoListsUncheckedCreateInput>
-        create,
-    required _i1.PrismaUnion<_i3.TodoListsUpdateInput,
-            _i3.TodoListsUncheckedUpdateInput>
-        update,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'create': create,
-      'update': update,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.upsertOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists>(
-      action: 'upsertOnetodo_lists',
-      result: result,
-      factory: (e) => _i2.TodoLists.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.TodoLists?> delete({
-    required _i3.TodoListsWhereUniqueInput where,
-    _i3.TodoListsSelect? select,
-    _i3.TodoListsInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.deleteOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.TodoLists?>(
-      action: 'deleteOnetodo_lists',
-      result: result,
-      factory: (e) => e != null ? _i2.TodoLists.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
-      {_i3.TodoListsWhereInput? where}) {
-    final args = {'where': where};
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.deleteMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'deleteManytodo_lists',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i3.TodoListsGroupByOutputType>> groupBy({
-    _i3.TodoListsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TodoListsOrderByWithAggregationInput>,
-            _i3.TodoListsOrderByWithAggregationInput>?
-        orderBy,
-    required _i1.PrismaUnion<Iterable<_i3.TodoListsScalar>, _i3.TodoListsScalar>
-        by,
-    _i3.TodoListsScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-    _i3.TodoListsGroupByOutputTypeSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'by': _i1.JsonQuery.groupBySerializer(by),
-      'having': having,
-      'take': take,
-      'skip': skip,
-      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.groupBy,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i3.TodoListsGroupByOutputType>>(
-      action: 'groupBytodo_lists',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i3.TodoListsGroupByOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i3.AggregateTodoLists> aggregate({
-    _i3.TodoListsWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.TodoListsOrderByWithRelationInput>,
-            _i3.TodoListsOrderByWithRelationInput>?
-        orderBy,
-    _i3.TodoListsWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i3.AggregateTodoListsSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'select': select,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'todo_lists',
-      action: _i1.JsonQueryAction.aggregate,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AggregateTodoLists>(
-      action: 'aggregatetodo_lists',
-      result: result,
-      factory: (e) => _i3.AggregateTodoLists.fromJson(e),
-    );
-  }
-}
-
-class UsersDelegate {
-  const UsersDelegate._(this._client);
-
-  final PrismaClient _client;
-
-  _i1.ActionClient<_i2.Users?> findUnique({
-    required _i3.UsersWhereUniqueInput where,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.findUnique,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users?>(
-      action: 'findUniqueusers',
-      result: result,
-      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Users> findUniqueOrThrow({
-    required _i3.UsersWhereUniqueInput where,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.findUniqueOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users>(
-      action: 'findUniqueusersOrThrow',
-      result: result,
-      factory: (e) => _i2.Users.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Users?> findFirst({
-    _i3.UsersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
-            _i3.UsersOrderByWithRelationInput>?
-        orderBy,
-    _i3.UsersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.UsersScalar, Iterable<_i3.UsersScalar>>? distinct,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.findFirst,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users?>(
-      action: 'findFirstusers',
-      result: result,
-      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i2.Users> findFirstOrThrow({
-    _i3.UsersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
-            _i3.UsersOrderByWithRelationInput>?
-        orderBy,
-    _i3.UsersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.UsersScalar, Iterable<_i3.UsersScalar>>? distinct,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.findFirstOrThrow,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users>(
-      action: 'findFirstusersOrThrow',
-      result: result,
-      factory: (e) => _i2.Users.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.Users>> findMany({
-    _i3.UsersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
-            _i3.UsersOrderByWithRelationInput>?
-        orderBy,
-    _i3.UsersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i1.PrismaUnion<_i3.UsersScalar, Iterable<_i3.UsersScalar>>? distinct,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'distinct': distinct,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.findMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.Users>>(
-      action: 'findManyusers',
-      result: result,
-      factory: (values) =>
-          (values as Iterable).map((e) => _i2.Users.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Users> create({
-    required _i1
-        .PrismaUnion<_i3.UsersCreateInput, _i3.UsersUncheckedCreateInput>
-        data,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.createOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users>(
-      action: 'createOneusers',
-      result: result,
-      factory: (e) => _i2.Users.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
-    required _i1.PrismaUnion<_i3.UsersCreateManyInput,
-            Iterable<_i3.UsersCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.createMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'createManyusers',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i2.CreateManyusersAndReturnOutputType>>
-      createManyAndReturn({
-    required _i1.PrismaUnion<_i3.UsersCreateManyInput,
-            Iterable<_i3.UsersCreateManyInput>>
-        data,
-    bool? skipDuplicates,
-    _i3.CreateManyusersAndReturnOutputTypeSelect? select,
-  }) {
-    final args = {
-      'data': data,
-      'skipDuplicates': skipDuplicates,
-      'select': select,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.createManyAndReturn,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i2.CreateManyusersAndReturnOutputType>>(
-      action: 'createManyusersAndReturn',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i2.CreateManyusersAndReturnOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i2.Users?> update({
-    required _i1
-        .PrismaUnion<_i3.UsersUpdateInput, _i3.UsersUncheckedUpdateInput>
-        data,
-    required _i3.UsersWhereUniqueInput where,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.updateOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users?>(
-      action: 'updateOneusers',
-      result: result,
-      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
-    required _i1.PrismaUnion<_i3.UsersUpdateManyMutationInput,
-            _i3.UsersUncheckedUpdateManyInput>
-        data,
-    _i3.UsersWhereInput? where,
-  }) {
-    final args = {
-      'data': data,
-      'where': where,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.updateMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'updateManyusers',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Users> upsert({
-    required _i3.UsersWhereUniqueInput where,
-    required _i1
-        .PrismaUnion<_i3.UsersCreateInput, _i3.UsersUncheckedCreateInput>
-        create,
-    required _i1
-        .PrismaUnion<_i3.UsersUpdateInput, _i3.UsersUncheckedUpdateInput>
-        update,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'create': create,
-      'update': update,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.upsertOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users>(
-      action: 'upsertOneusers',
-      result: result,
-      factory: (e) => _i2.Users.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<_i2.Users?> delete({
-    required _i3.UsersWhereUniqueInput where,
-    _i3.UsersSelect? select,
-    _i3.UsersInclude? include,
-  }) {
-    final args = {
-      'where': where,
-      'select': select,
-      'include': include,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.deleteOne,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i2.Users?>(
-      action: 'deleteOneusers',
-      result: result,
-      factory: (e) => e != null ? _i2.Users.fromJson(e) : null,
-    );
-  }
-
-  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
-      {_i3.UsersWhereInput? where}) {
-    final args = {'where': where};
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.deleteMany,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AffectedRowsOutput>(
-      action: 'deleteManyusers',
-      result: result,
-      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
-    );
-  }
-
-  _i1.ActionClient<Iterable<_i3.UsersGroupByOutputType>> groupBy({
-    _i3.UsersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithAggregationInput>,
-            _i3.UsersOrderByWithAggregationInput>?
-        orderBy,
-    required _i1.PrismaUnion<Iterable<_i3.UsersScalar>, _i3.UsersScalar> by,
-    _i3.UsersScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-    _i3.UsersGroupByOutputTypeSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'by': _i1.JsonQuery.groupBySerializer(by),
-      'having': having,
-      'take': take,
-      'skip': skip,
-      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.groupBy,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<Iterable<_i3.UsersGroupByOutputType>>(
-      action: 'groupByusers',
-      result: result,
-      factory: (values) => (values as Iterable)
-          .map((e) => _i3.UsersGroupByOutputType.fromJson(e)),
-    );
-  }
-
-  _i1.ActionClient<_i3.AggregateUsers> aggregate({
-    _i3.UsersWhereInput? where,
-    _i1.PrismaUnion<Iterable<_i3.UsersOrderByWithRelationInput>,
-            _i3.UsersOrderByWithRelationInput>?
-        orderBy,
-    _i3.UsersWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    _i3.AggregateUsersSelect? select,
-  }) {
-    final args = {
-      'where': where,
-      'orderBy': orderBy,
-      'cursor': cursor,
-      'take': take,
-      'skip': skip,
-      'select': select,
-    };
-    final query = _i1.serializeJsonQuery(
-      args: args,
-      modelName: 'users',
-      action: _i1.JsonQueryAction.aggregate,
-      datamodel: PrismaClient.datamodel,
-    );
-    final result = _client.$engine.request(
-      query,
-      headers: _client.$transaction.headers,
-      transaction: _client.$transaction.transaction,
-    );
-    return _i1.ActionClient<_i3.AggregateUsers>(
-      action: 'aggregateusers',
-      result: result,
-      factory: (e) => _i3.AggregateUsers.fromJson(e),
-    );
-  }
-}
-
 class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
   PrismaClient({
     super.datasourceUrl,
@@ -3548,551 +3048,15 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'name': 'Tutoring',
             'dbName': null,
           },
+          {
+            'name': 'Other',
+            'dbName': null,
+          },
         ],
         'dbName': null,
       },
     ],
     'models': [
-      {
-        'name': 'assignments',
-        'dbName': null,
-        'fields': [
-          {
-            'name': 'assignment_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': true,
-            'isReadOnly': false,
-            'hasDefaultValue': true,
-            'type': 'Int',
-            'default': {
-              'name': 'autoincrement',
-              'args': [],
-            },
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'create_date',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'DateTime',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'subject',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'String',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'notes',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'String',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'due_date',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'DateTime',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'assignment_type',
-            'kind': 'enum',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'assignment_type',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'list_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'todo_lists',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'todo_lists',
-            'relationName': 'assignmentsTotodo_lists',
-            'relationFromFields': ['list_id'],
-            'relationToFields': ['list_id'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'project_members',
-            'kind': 'object',
-            'isList': true,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'project_members',
-            'relationName': 'assignmentsToproject_members',
-            'relationFromFields': [],
-            'relationToFields': [],
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'projects',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'projects',
-            'relationName': 'assignmentsToprojects',
-            'relationFromFields': [],
-            'relationToFields': [],
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'reminders',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'reminders',
-            'relationName': 'assignmentsToreminders',
-            'relationFromFields': [],
-            'relationToFields': [],
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-        ],
-        'primaryKey': null,
-        'uniqueFields': [],
-        'uniqueIndexes': [],
-        'isGenerated': false,
-      },
-      {
-        'name': 'project_members',
-        'dbName': null,
-        'fields': [
-          {
-            'name': 'project_member_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': true,
-            'isReadOnly': false,
-            'hasDefaultValue': true,
-            'type': 'Int',
-            'default': {
-              'name': 'autoincrement',
-              'args': [],
-            },
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'assignment_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'member_username',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'String',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'assignments',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'assignments',
-            'relationName': 'assignmentsToproject_members',
-            'relationFromFields': ['assignment_id'],
-            'relationToFields': ['assignment_id'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'users',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'users',
-            'relationName': 'project_membersTousers',
-            'relationFromFields': ['member_username'],
-            'relationToFields': ['username'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-        ],
-        'primaryKey': null,
-        'uniqueFields': [],
-        'uniqueIndexes': [],
-        'isGenerated': false,
-      },
-      {
-        'name': 'projects',
-        'dbName': null,
-        'fields': [
-          {
-            'name': 'assignment_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': true,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'complete_date',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'DateTime',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'completed',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'Boolean',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'assignments',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'assignments',
-            'relationName': 'assignmentsToprojects',
-            'relationFromFields': ['assignment_id'],
-            'relationToFields': ['assignment_id'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'tasks',
-            'kind': 'object',
-            'isList': true,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'tasks',
-            'relationName': 'projectsTotasks',
-            'relationFromFields': [],
-            'relationToFields': [],
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-        ],
-        'primaryKey': null,
-        'uniqueFields': [],
-        'uniqueIndexes': [],
-        'isGenerated': false,
-      },
-      {
-        'name': 'reminders',
-        'dbName': null,
-        'fields': [
-          {
-            'name': 'assignment_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': true,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'reminder_category',
-            'kind': 'enum',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'reminder_category',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'assignments',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'assignments',
-            'relationName': 'assignmentsToreminders',
-            'relationFromFields': ['assignment_id'],
-            'relationToFields': ['assignment_id'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-        ],
-        'primaryKey': null,
-        'uniqueFields': [],
-        'uniqueIndexes': [],
-        'isGenerated': false,
-      },
-      {
-        'name': 'tasks',
-        'dbName': null,
-        'fields': [
-          {
-            'name': 'assignment_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': true,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'complete_date',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'DateTime',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'completed',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'Boolean',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'parent_project',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'projects',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': false,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'projects',
-            'relationName': 'projectsTotasks',
-            'relationFromFields': ['parent_project'],
-            'relationToFields': ['assignment_id'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-        ],
-        'primaryKey': null,
-        'uniqueFields': [],
-        'uniqueIndexes': [],
-        'isGenerated': false,
-      },
-      {
-        'name': 'todo_lists',
-        'dbName': null,
-        'fields': [
-          {
-            'name': 'user_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': true,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'list_id',
-            'kind': 'scalar',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': true,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'Int',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'assignments',
-            'kind': 'object',
-            'isList': true,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'assignments',
-            'relationName': 'assignmentsTotodo_lists',
-            'relationFromFields': [],
-            'relationToFields': [],
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-          {
-            'name': 'users',
-            'kind': 'object',
-            'isList': false,
-            'isRequired': true,
-            'isUnique': false,
-            'isId': false,
-            'isReadOnly': false,
-            'hasDefaultValue': false,
-            'type': 'users',
-            'relationName': 'todo_listsTousers',
-            'relationFromFields': ['user_id'],
-            'relationToFields': ['user_id'],
-            'relationOnDelete': 'NoAction',
-            'isGenerated': false,
-            'isUpdatedAt': false,
-          },
-        ],
-        'primaryKey': null,
-        'uniqueFields': [],
-        'uniqueIndexes': [],
-        'isGenerated': false,
-      },
       {
         'name': 'users',
         'dbName': null,
@@ -4106,9 +3070,9 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'isId': true,
             'isReadOnly': false,
             'hasDefaultValue': true,
-            'type': 'Int',
+            'type': 'String',
             'default': {
-              'name': 'autoincrement',
+              'name': 'cuid',
               'args': [],
             },
             'isGenerated': false,
@@ -4196,12 +3160,16 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'name': 'join_date',
             'kind': 'scalar',
             'isList': false,
-            'isRequired': false,
+            'isRequired': true,
             'isUnique': false,
             'isId': false,
             'isReadOnly': false,
-            'hasDefaultValue': false,
+            'hasDefaultValue': true,
             'type': 'DateTime',
+            'default': {
+              'name': 'now',
+              'args': [],
+            },
             'isGenerated': false,
             'isUpdatedAt': false,
           },
@@ -4209,7 +3177,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'name': 'user_timezone',
             'kind': 'scalar',
             'isList': false,
-            'isRequired': true,
+            'isRequired': false,
             'isUnique': false,
             'isId': false,
             'isReadOnly': false,
@@ -4235,7 +3203,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'isUpdatedAt': false,
           },
           {
-            'name': 'todo_lists',
+            'name': 'assignments',
             'kind': 'object',
             'isList': true,
             'isRequired': true,
@@ -4243,10 +3211,531 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'isId': false,
             'isReadOnly': false,
             'hasDefaultValue': false,
-            'type': 'todo_lists',
-            'relationName': 'todo_listsTousers',
+            'type': 'assignments',
+            'relationName': 'assignmentsTousers',
             'relationFromFields': [],
             'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+        ],
+        'primaryKey': null,
+        'uniqueFields': [],
+        'uniqueIndexes': [],
+        'isGenerated': false,
+      },
+      {
+        'name': 'assignments',
+        'dbName': null,
+        'fields': [
+          {
+            'name': 'assignment_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': true,
+            'isReadOnly': false,
+            'hasDefaultValue': true,
+            'type': 'String',
+            'default': {
+              'name': 'cuid',
+              'args': [],
+            },
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'create_date',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': true,
+            'type': 'DateTime',
+            'default': {
+              'name': 'now',
+              'args': [],
+            },
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'updated_at',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'DateTime',
+            'isGenerated': false,
+            'isUpdatedAt': true,
+          },
+          {
+            'name': 'subject',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'notes',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'due_date',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'DateTime',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'user_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'assignment_type',
+            'kind': 'enum',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'assignment_type',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'users',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'users',
+            'relationName': 'assignmentsTousers',
+            'relationFromFields': ['user_id'],
+            'relationToFields': ['user_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'projects',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'projects',
+            'relationName': 'assignmentsToprojects',
+            'relationFromFields': [],
+            'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'reminders',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'reminders',
+            'relationName': 'assignmentsToreminders',
+            'relationFromFields': [],
+            'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'tasks',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'tasks',
+            'relationName': 'assignmentsTotasks',
+            'relationFromFields': [],
+            'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+        ],
+        'primaryKey': null,
+        'uniqueFields': [],
+        'uniqueIndexes': [],
+        'isGenerated': false,
+      },
+      {
+        'name': 'tasks',
+        'dbName': null,
+        'fields': [
+          {
+            'name': 'assignment_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': true,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'complete_date',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'DateTime',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'completed',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'Boolean',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'parent_project',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'assignments',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'assignments',
+            'relationName': 'assignmentsTotasks',
+            'relationFromFields': ['assignment_id'],
+            'relationToFields': ['assignment_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'projects',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'projects',
+            'relationName': 'projectsTotasks',
+            'relationFromFields': ['parent_project'],
+            'relationToFields': ['assignment_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+        ],
+        'primaryKey': null,
+        'uniqueFields': [],
+        'uniqueIndexes': [],
+        'isGenerated': false,
+      },
+      {
+        'name': 'reminders',
+        'dbName': null,
+        'fields': [
+          {
+            'name': 'assignment_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': true,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'reminder_category',
+            'kind': 'enum',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'reminder_category',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'assignments',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'assignments',
+            'relationName': 'assignmentsToreminders',
+            'relationFromFields': ['assignment_id'],
+            'relationToFields': ['assignment_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+        ],
+        'primaryKey': null,
+        'uniqueFields': [],
+        'uniqueIndexes': [],
+        'isGenerated': false,
+      },
+      {
+        'name': 'projects',
+        'dbName': null,
+        'fields': [
+          {
+            'name': 'assignment_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': true,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'complete_date',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': false,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'DateTime',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'completed',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'Boolean',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'assignments',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'assignments',
+            'relationName': 'assignmentsToprojects',
+            'relationFromFields': ['assignment_id'],
+            'relationToFields': ['assignment_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'tasks',
+            'kind': 'object',
+            'isList': true,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'tasks',
+            'relationName': 'projectsTotasks',
+            'relationFromFields': [],
+            'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'project_members',
+            'kind': 'object',
+            'isList': true,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'project_members',
+            'relationName': 'project_membersToprojects',
+            'relationFromFields': [],
+            'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+        ],
+        'primaryKey': null,
+        'uniqueFields': [],
+        'uniqueIndexes': [],
+        'isGenerated': false,
+      },
+      {
+        'name': 'project_members',
+        'dbName': null,
+        'fields': [
+          {
+            'name': 'project_member_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': true,
+            'isReadOnly': false,
+            'hasDefaultValue': true,
+            'type': 'String',
+            'default': {
+              'name': 'cuid',
+              'args': [],
+            },
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'assignment_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'member_username',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'project',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'projects',
+            'relationName': 'project_membersToprojects',
+            'relationFromFields': ['assignment_id'],
+            'relationToFields': ['assignment_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'users',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'users',
+            'relationName': 'project_membersTousers',
+            'relationFromFields': ['member_username'],
+            'relationToFields': ['username'],
+            'relationOnDelete': 'NoAction',
             'isGenerated': false,
             'isUpdatedAt': false,
           },
@@ -4260,6 +3749,22 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
     'types': [],
     'indexes': [
       {
+        'model': 'users',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'users',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'username'}
+        ],
+      },
+      {
         'model': 'assignments',
         'type': 'id',
         'isDefinedOnField': true,
@@ -4268,15 +3773,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
         ],
       },
       {
-        'model': 'project_members',
-        'type': 'id',
-        'isDefinedOnField': true,
-        'fields': [
-          {'name': 'project_member_id'}
-        ],
-      },
-      {
-        'model': 'projects',
+        'model': 'tasks',
         'type': 'unique',
         'isDefinedOnField': true,
         'fields': [
@@ -4292,7 +3789,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
         ],
       },
       {
-        'model': 'tasks',
+        'model': 'projects',
         'type': 'unique',
         'isDefinedOnField': true,
         'fields': [
@@ -4300,27 +3797,11 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
         ],
       },
       {
-        'model': 'todo_lists',
+        'model': 'project_members',
         'type': 'id',
         'isDefinedOnField': true,
         'fields': [
-          {'name': 'list_id'}
-        ],
-      },
-      {
-        'model': 'users',
-        'type': 'id',
-        'isDefinedOnField': true,
-        'fields': [
-          {'name': 'user_id'}
-        ],
-      },
-      {
-        'model': 'users',
-        'type': 'unique',
-        'isDefinedOnField': true,
-        'fields': [
-          {'name': 'username'}
+          {'name': 'project_member_id'}
         ],
       },
     ],
@@ -4353,7 +3834,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
   @override
   get $engine => _engine ??= _i5.BinaryEngine(
         schema:
-            'generator client {\n  provider = "dart run orm"\n}\n\ndatasource db {\n  provider = "postgresql"\n  url      = env("DATABASE_URL")\n}\n\nmodel assignments {\n  assignment_id   Int               @id @default(autoincrement())\n  create_date     DateTime?         @db.Timestamp(6)\n  subject         String            @db.VarChar(255)\n  notes           String?\n  due_date        DateTime?         @db.Timestamp(6)\n  assignment_type assignment_type?\n  list_id         Int\n  todo_lists      todo_lists        @relation(fields: [list_id], references: [list_id], onDelete: NoAction, onUpdate: NoAction)\n  project_members project_members[]\n  projects        projects?\n  reminders       reminders?\n}\n\nmodel project_members {\n  project_member_id Int         @id @default(autoincrement())\n  assignment_id     Int\n  member_username   String?     @db.VarChar(255)\n  assignments       assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n  users             users?      @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel projects {\n  assignment_id Int         @unique\n  complete_date DateTime?   @db.Timestamp(6)\n  completed     Boolean\n  assignments   assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n  tasks         tasks[]\n}\n\nmodel reminders {\n  assignment_id     Int                @unique\n  reminder_category reminder_category?\n  assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel tasks {\n  assignment_id  Int       @unique\n  complete_date  DateTime? @db.Timestamp(6)\n  completed      Boolean\n  parent_project Int?\n  projects       projects? @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel todo_lists {\n  user_id     Int\n  list_id     Int           @id\n  assignments assignments[]\n  users       users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel users {\n  user_id         Int               @id @default(autoincrement())\n  email           String            @db.VarChar(255)\n  signin_method   String?           @db.VarChar(255)\n  name            String            @db.VarChar(255)\n  device          String?           @db.VarChar(255)\n  username        String            @unique @db.VarChar(255)\n  password        String            @db.VarChar(255)\n  join_date       DateTime?         @db.Timestamp(6)\n  user_timezone   Int\n  project_members project_members[]\n  todo_lists      todo_lists[]\n}\n\nenum assignment_type {\n  Reminder\n  Task\n  Project\n}\n\nenum reminder_category {\n  Event\n  Meeting\n  Webinar\n  Interview\n  Tutoring\n}\n',
+            'generator client {\n  provider = "dart run orm"\n  // output   = "../lib/src/prisma/generated"\n}\n\ndatasource db {\n  provider = "postgresql"\n  url      = env("DATABASE_URL")\n}\n\nmodel users {\n  user_id         String            @id @default(cuid())\n  email           String            @db.VarChar(255)\n  signin_method   String?           @db.VarChar(255)\n  name            String            @db.VarChar(255)\n  device          String?           @db.VarChar(255)\n  username        String            @unique @db.VarChar(255)\n  password        String            @db.VarChar(255)\n  join_date       DateTime          @default(now())\n  user_timezone   Int?\n  project_members project_members[]\n  // todo_lists      todo_lists[]\n  assignments     assignments[]\n}\n\n//  all ids should use cuid and be strings\n// create date should be required\n// create date is mandatory, now()\nmodel assignments {\n  assignment_id   String          @id @default(cuid())\n  create_date     DateTime        @default(now())\n  updated_at      DateTime?       @updatedAt\n  subject         String          @db.VarChar(255)\n  notes           String?\n  due_date        DateTime?       @db.Timestamp(6)\n  user_id         String\n  assignment_type assignment_type\n  users           users           @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)\n  // list_id         Int\n  // todo_lists      todo_lists        @relation(fields: [list_id], references: [list_id], onDelete: NoAction, onUpdate: NoAction)\n  projects        projects?\n  reminders       reminders?\n  tasks           tasks?\n}\n\nenum assignment_type {\n  Reminder\n  Task\n  Project\n}\n\n// create relation to assignments\nmodel tasks {\n  assignment_id  String      @unique\n  complete_date  DateTime?   @db.Timestamp(6)\n  completed      Boolean\n  parent_project String?\n  assignments    assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n  projects       projects?   @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n}\n\n// reminder category is required\n// reminder category default is other\nmodel reminders {\n  assignment_id     String            @unique\n  reminder_category reminder_category\n  assignments       assignments       @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n}\n\n// add type other\nenum reminder_category {\n  Event\n  Meeting\n  Webinar\n  Interview\n  Tutoring\n  Other\n}\n\n// list_id should auto increment like user id\n// user_id should be unique\n// model todo_lists {\n//   user_id     Int\n//   list_id     Int           @id\n//   assignments assignments[]\n//   users       users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)\n// }\n\n// create relation between projects and tasks\nmodel projects {\n  assignment_id   String            @unique\n  complete_date   DateTime?         @db.Timestamp(6)\n  completed       Boolean\n  assignments     assignments       @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n  tasks           tasks[]\n  project_members project_members[]\n}\n\n// assigned to projects, review later\nmodel project_members {\n  project_member_id String   @id @default(cuid())\n  assignment_id     String\n  member_username   String   @db.VarChar(255)\n  project           projects @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)\n  users             users    @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)\n}\n',
         datasources: const {
           'db': _i1.Datasource(
             _i1.DatasourceType.environment,
@@ -4366,17 +3847,15 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
   @override
   get $datamodel => datamodel;
 
+  UsersDelegate get users => UsersDelegate._(this);
+
   AssignmentsDelegate get assignments => AssignmentsDelegate._(this);
-
-  ProjectMembersDelegate get projectMembers => ProjectMembersDelegate._(this);
-
-  ProjectsDelegate get projects => ProjectsDelegate._(this);
-
-  RemindersDelegate get reminders => RemindersDelegate._(this);
 
   TasksDelegate get tasks => TasksDelegate._(this);
 
-  TodoListsDelegate get todoLists => TodoListsDelegate._(this);
+  RemindersDelegate get reminders => RemindersDelegate._(this);
 
-  UsersDelegate get users => UsersDelegate._(this);
+  ProjectsDelegate get projects => ProjectsDelegate._(this);
+
+  ProjectMembersDelegate get projectMembers => ProjectMembersDelegate._(this);
 }

@@ -1,244 +1,278 @@
-import 'dart:convert';
+// ignore_for_file: lines_longer_than_80_chars
 import 'package:dart_frog/dart_frog.dart';
 import 'package:orm/orm.dart';
-// import the prisam client so prisma functions can run
+// import 'package:postgres/messages.dart';
+// import the prisma client so prisma functions can run
 import '../../prisma/generated_dart_client/client.dart';
 import '../../prisma/generated_dart_client/model.dart';
 import '../../prisma/generated_dart_client/prisma.dart';
 final prisma = PrismaClient();
 
+// TODO: encode all the create reminders and patched reminders into encoded JSON
+// TODO: update DB Schema
+// TODO: Update code with new schema relations
+
 /* Dart frog only has one function call onRequest that is called any time the 
 route is called. Therefore we are using a switch statement to determine what
 function should be called based on the HTTP method sent
  */
+
 Future<Response> onRequest(RequestContext context) async{
   return switch(context.request.method){
-    HttpMethod.get => _getTasks(context),
-    HttpMethod.post => _createTasks(context),
+    HttpMethod.post => _createTask(context),
+    HttpMethod.patch => _updateTask(context),
+    HttpMethod.delete => _deleteTask(context),
     _=> Future.value(Response(body:'default message, http method not set'))
   };
 }
 
-/* if a get request is sent then call get Users. 
- get users doesn't take any arguments or context as its called in dart
- the function returns a response saying all users are displayed and the users 
- printed to the console */
-Future<Response> _getTasks(RequestContext context) async {
-  // final request = context.request;
-  final json = (await context.request.json()) as Map<String,dynamic>;
-  final userId = json['userId'] as int;
-
-  //
-  //
-  // 
-  /* findMany() returns all the tuples in a given table
-  the function returns a iterable type. Iterable is a list in Dart that doesn't 
-  have the ability to be randomly accessed*/
-  // https://dart.dev/libraries/collections/iterables
-
-  
-// final users_reminders = await prisma.users.findMany(
-//   where: UsersWhereInput(
-//     userId: PrismaUnion.$1(
-//           IntFilter(equals: PrismaUnion.$1(userId)),
-//         ),
-//   ),
-//   include: const Include()
-// );
 
 
-
-  final tasks = await prisma.assignments.findMany(
-    where:  AssignmentsWhereInput(
-      assignmentType: PrismaUnion.$1(EnumassignmentTypeNullableFilter(
-        equals: PrismaUnion.$1(AssignmentType.reminder),
-      ),
-      ),
-      todoLists: PrismaUnion.$1(
-      TodoListsRelationFilter(
-        $is: TodoListsWhereInput(
-        userId: PrismaUnion.$1(
-          IntFilter(equals: PrismaUnion.$1(userId)),
-      ),
-    ),
-    ),
-      ),
-      ),
-  include: const AssignmentsInclude(
-    reminders: PrismaUnion.$1(true),
-    todoLists: PrismaUnion.$1(true),
-  ),
-);
-  // returning a message that lets user know that all users were read successfully
-  for (final element in tasks){
-    print('Task subject: ${element.subject}| The Author is: ${element.todoLists!.userId} ');
-  }
-  return Response.json(body: jsonEncode(tasks.toList()));
-// https://codewithandrea.com/articles/parse-json-dart/
-}
-
-/*This function creates new user with some given exceptions
-The functions returns a message letting you know what error you ran into or if
-the user was created successfully
-
-the function requires a context argument to get the users json data when the route 
-is called
-
+/*
+_createReminders will create a reminder for a user.
+It requires the following fields:subject and email.
+ I already set the assignment type, and create date
+Optional fields: due_date, notes, reminder type, 
  */
-Future<Response> _createTasks(RequestContext context)async{
+Future<Response> _createTask(RequestContext context) async {
+  
   // transform the information from the request into json in the form of a map
   final json = (await context.request.json()) as Map<String,dynamic>;
-  print('start');
-  // final userId = ( context.request.headers) as int;
-  //function tries to create user, if there are errors it will output those errors
   try{
-    //assign the name, email, password, username and timezone  of the user
-    //as data-type casts the dynamic into the data-type of the attribute
-  final subject = json['subject'] as String;
-  final notes = json['notes'] as String;
-  // final  dueDate = json ['dueDate'] as DateTime;
-  final string_assignmentType = json ['assignmentType'] as String;
-  // final parentProject = json ['parentProject'] as int;
-  final userId = json['userId'] as int ;
-  final now = DateTime.now();
-final later = now.add(const Duration(hours: 168));
-  // final listId = await prisma.todoLists.findFirst(
-  //     where: TodoListsWhereInput(
-  //       userId: PrismaUnion.$1(
-  //         IntFilter(equals: PrismaUnion.$1(userId)),
-  //         // StringFilter(contains: PrismaUnion.$1(userId)),
-  //       ),
-  //     ),
-  //   );
+    /* cast the email of the user asa string
+    a ternary operator is used to determine if the variable is a string, 
+    can be converted to a string or should be defaulted to an empty string
+    defaulting to an empty string prevents null errors */
+    final email = json['email'] is String ? json['email'] as String : '';
+      // empty names or passwords are not allowed and throw a format exception
+      if ( email=='' ){
+        // function caught exceptions and lets user know about error
+        // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
+        throw Exception('email is empty');
+      }
 
-  // empty names, username, emails or passwords are not allowed and throw a format exception
-  // if (dueDate.toString()=='' || subject==''|| notes=='' || listId>0){
-   if ( subject==''){
-
-    // function catched format exceptions and lets user know about error
-    // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
-    throw const FormatException();
-  }
-// the below may not be neccessary since the path is determined by the assignment type
-  if (!(string_assignmentType == 'Reminder'
-  || string_assignmentType == 'Task'
-  || string_assignmentType == 'Assignment')){
-    // function catched format exceptions and lets user know about error
-    // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
-    throw Exception('assignment type is not set correctly');
-  }else if(string_assignmentType == 'Reminder' ){
-     const assignmentType= AssignmentType.reminder;
-  }else if(string_assignmentType == 'Task' ){
-     const assignmentType= AssignmentType.task;
-  }else if(string_assignmentType == 'Project' ){
-     const assignmentType= AssignmentType.project;
-  }
-//retrieve users list id
-  // if the values are not null, then prisma will try to create the user 
-  final created_assigment = await prisma.assignments.create(
-    data: PrismaUnion.$1(AssignmentsCreateInput(
-      createDate: PrismaUnion.$1(now),
-      subject: subject,
-      notes: PrismaUnion.$1(notes),
-      dueDate: PrismaUnion.$1(later),  
-      assignmentType: const PrismaUnion.$1(AssignmentType.reminder),
-      todoLists: TodoListsCreateNestedOneWithoutAssignmentsInput(
-        connect: TodoListsWhereUniqueInput(
-          listId: 1,
-          userId: PrismaUnion.$1(
-          IntFilter(equals: PrismaUnion.$1(userId)),
-          // StringFilter(contains: PrismaUnion.$1(userId)),
-          ),
+    /* find the first row with the matching email. the emails must be unique 
+    */
+    final user = await prisma.users.findFirst(
+      where: UsersWhereInput(
+        email: PrismaUnion.$1(
+          StringFilter(contains: PrismaUnion.$1(email)),
         ),
       ),
-    ),
-    ),
-  );
-print('success');
-    final last_created_task = await prisma.assignments.findFirst(
-      orderBy: const PrismaUnion.$2(
-        AssignmentsOrderByWithRelationInput(createDate: PrismaUnion.$1(SortOrder.desc),
-      ),
-      ),
-    where:  AssignmentsWhereInput(
-      assignmentType: PrismaUnion.$1(EnumassignmentTypeNullableFilter(
-        equals: PrismaUnion.$1(AssignmentType.reminder),
-      ),
-      ),
-      todoLists: PrismaUnion.$1(
-      TodoListsRelationFilter(
-        $is: TodoListsWhereInput(
-        userId: PrismaUnion.$1(
-          IntFilter(equals: PrismaUnion.$1(userId)),
-      ),
-    ),
-    ),
-      ),
-      ),
-  include: const AssignmentsInclude(
-    reminders: PrismaUnion.$1(true),
-    todoLists: PrismaUnion.$1(true),
-  ),
-);
- print('success');
+    );
 
- await prisma.reminders.create(
-  data: PrismaUnion.$1(RemindersCreateInput(
-  reminderCategory: PrismaUnion.$1(ReminderCategory.event),
-  assignments:  AssignmentsCreateNestedOneWithoutRemindersInput(connect: AssignmentsWhereUniqueInput(
-  assignmentId: last_created_task?.assignmentId,
-  
-),),
-),),
- );
- print('success');
+
+    //if no user is found throw an error
+    if (user==null){
+      // no user found, throw error
+      throw Exception('user not found/ incorrect email');
+    }
+
+    print('user found');
+
+
+    final subject = json['subject'] as String;
+    var notes = json['notes'];
+    var dueDate = json['due_date'] ;
+    var parentProject = json['parent_project'];
+    // Subject field is required
+    if ( subject==''){
+    // function catched format exceptions and lets user know about error
+    // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
+    throw Exception('subject empty');
+    }
+    // the below may not be neccessary since the path is determined by the assignment type
+
+    //retrieve users list id
+    // if the values are not null, then prisma will try to create the user 
+    final created_assignment = await prisma.assignments.create(
+      data: PrismaUnion.$1(AssignmentsCreateInput(
+        subject: subject,
+        notes: notes!= null ? PrismaUnion.$1(notes as String) : null,
+        dueDate: dueDate!= null ? PrismaUnion.$1(dueDate as DateTime) : null,  
+        assignmentType:  AssignmentType.task,
+        users: UsersCreateNestedOneWithoutAssignmentsInput(
+          connect: UsersWhereUniqueInput(
+            userId: user.userId,
+          ),
+        ),
+      ),),
+    );
+
+    print('successfully created an assignment');
+    // we call the database to get the last created assignment so we can save it 
+    // as a reminder
  
-  return Response.json(
-    body:{
-      'message':'Saved!',
-      'Task':{
-        'subject': subject,
-        // 'createDate': now.toIso8601String(),
-        'user': userId,
-        'notes': notes
 
-      },
-    },
-  );
-  // the error handling is defined below
-  // there may be more errors but these have been the most common issues I have seen
-  }on FormatException {
+    print('successfully found users last created assignment');
+    Tasks created_task;
+    if(parentProject == null){
+
+     created_task = await prisma.tasks.create(
+        data: PrismaUnion.$1(TasksCreateInput(
+          completed: false,
+          assignments:  AssignmentsCreateNestedOneWithoutTasksInput(
+            connect: AssignmentsWhereUniqueInput(
+              assignmentId:  created_assignment.assignmentId,
+            ),
+          ),
+        ),),
+      );
+
+    }else{
+
+      created_task = await prisma.tasks.create(
+        data: PrismaUnion.$1(TasksCreateInput(
+          completed: false,
+          assignments:  AssignmentsCreateNestedOneWithoutTasksInput(
+            connect: AssignmentsWhereUniqueInput(
+              assignmentId:  created_assignment.assignmentId,
+            ),
+          ),
+          projects : ProjectsCreateNestedOneWithoutTasksInput(
+            connect: ProjectsWhereUniqueInput(
+              assignmentId: parentProject != null ? parentProject as String : null,
+            ),
+          ),
+        ),),
+      );
+      
+    }
+
+    print('successfully created task');
+  
     return Response.json(
       body:{
-        'message':'error, missing data or incorrect data entered into form',
+        'message':'Saved!',
+        'Task':{
+          'assignment_id':  created_assignment.assignmentId,
+          'subject':        created_assignment.subject,
+          'notes':          created_assignment.notes,
+          'due_date':       created_assignment.dueDate.toString(),
+          'completed' :     created_task.completed ,
+          'parent_project': created_task.parentProject ,
+        },
       },
     );
+  // the error handling is defined below
+  // there may be more errors but these have been the most common issues I have seen
+
   }catch (e){
-    if(e.toString().contains('username')){
-      return Response.json(
-        body:{
-          'message':'username already taken, please enter a new username',
-          },
-        );
-    }if(e.toString().contains('email')){
-      return Response.json(
-        body:{
-          'message':'email already taken, please enter a new email',
-          },
-        );
-    }if(e.toString().contains('null')){
-      return Response.json(
-        body:{
-          'message':'one of the required fields was left blank, required name, username, password, email and timezone fields',
-          },
-        );
-    }else{
+
     return Response.json(
       body:{
         // any unseen errors will pop up here so they can be fixed
         'message':'error message: $e',
         },
       );
-    }
+    
   }
 }
+
+
+
+Future<Response> _updateTask(RequestContext context) async {
+  /* save all body data as a Map<string,dynamic>. A map<string, dynamic> 
+  is a hashmap that has the first value labeled as a string and the second 
+  value defined as dynamic because it can be any type*/
+  try{
+    final json = (await context.request.json()) as Map<String,dynamic>;
+
+    /* cast the email of the user as a string type
+    a ternary operator is used to determine if the variable is a string, 
+    can be converted to a string or should be defaulted to an empty string
+    defaulting to an empty string prevents null errors */
+    final assignmentId = json['assignment_id'] as String;
+    final newSubject = json['subject'] as String?;
+    final newNotes = json['notes'] as String?;
+    final newDueDate = json ['due_date'] as DateTime?;
+    final completed = json ['completed'] as bool?;
+    final now = DateTime.now();
+    List<Map<String, Object?>> assignment;
+    if(newSubject != null){
+       assignment = await prisma.$raw.query(
+        'UPDATE assignments SET "subject" = \$1, "updated_at" = \$2 FROM tasks WHERE assignments.assignment_id = \$3 AND assignments.assignment_id = tasks.assignment_id RETURNING *',
+      [newSubject, now, assignmentId], // Bind parameters
+      );
+    }else if(newNotes != null){
+        assignment = await prisma.$raw.query(
+        'UPDATE assignments SET notes = \$1, "updated_at" = \$2 FROM tasks WHERE assignments.assignment_id = \$3 AND assignments.assignment_id = tasks.assignment_id RETURNING *',
+        [newNotes, now ,assignmentId],
+      );
+    }else if(completed != null && completed){
+      
+      await prisma.$raw.query(
+      'UPDATE assignments SET "updated_at" = \$1 WHERE assignments.assignment_id = \$2 ',
+      [now, assignmentId],
+      );
+
+      assignment = await prisma.$raw.query(
+      'UPDATE tasks SET completed = true, complete_date = \$1 FROM assignments WHERE tasks.assignment_id = \$2 AND assignments.assignment_id = tasks.assignment_id RETURNING *',
+      [now, assignmentId],
+      );
+
+    }else if(completed != null && !completed){
+
+      await prisma.$raw.query(
+      'UPDATE assignments SET "updated_at" = \$1 WHERE assignments.assignment_id = \$2 ',
+      [now, assignmentId],
+      );
+
+      assignment = await prisma.$raw.query(
+      'UPDATE tasks SET completed = false, complete_date = null FROM assignments WHERE tasks.assignment_id = \$1 AND assignments.assignment_id = tasks.assignment_id RETURNING *',
+      [assignmentId],
+      );
+
+    }else if(newDueDate != null){
+
+        assignment = await prisma.$raw.query(
+      'UPDATE assignments SET "subject" = \$1, "updated_at" = \$2 FROM tasks WHERE assignments.assignment_id = \$3 AND tasks.assignment_id = assignments.assignment_id RETURNING *',
+      [newDueDate, now, assignmentId], // Bind parameters
+      );
+
+    }else{
+      throw Exception('notes, subject, dueDate, and completed fields were null');
+    }
+
+    Map<String, Object?> updatedAssignment = assignment.first;
+
+    // return Response.json(body: jsonEncode(assignment));
+  return Response.json(
+      body:{
+        'message':'Task updated!',
+        'Task': {
+          'assignment_id' :     updatedAssignment['assignment_id'],
+          'update_at' :         updatedAssignment['updated_at'].toString(),
+          'subject':            updatedAssignment['subject'],
+          'dueDate':            updatedAssignment['due_date'].toString(),
+          'notes':              updatedAssignment['notes'],
+          'completed' :         updatedAssignment['completed'],
+          'completed_date':     updatedAssignment['complete_date'].toString(),
+        },
+      },
+    );    // https://codewithandrea.com/articles/parse-json-dart/
+  }catch (e){
+    return Response.json(body: '$e');
+  }
+}
+
+Future<Response> _deleteTask(RequestContext context) async{
+
+  try{
+
+    final json = (await context.request.json()) as Map<String,dynamic>;
+    // final email = json['email'] is String ? json['email'] as String : '';
+    final assignmentId = json['assignment_id'] as String;
+    await prisma.tasks.delete(
+        where: TasksWhereUniqueInput(assignmentId: assignmentId),
+    );
+
+   await prisma.assignments.delete(
+        where: AssignmentsWhereUniqueInput(assignmentId: assignmentId),
+    );
+
+  }catch(e){
+    return Response.json(body: '$e');
+  }
+    return Response(body: 'Task deleted');
+  }

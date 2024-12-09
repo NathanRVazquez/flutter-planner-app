@@ -12,8 +12,7 @@ function should be called based on the HTTP method sent
  */
 Future<Response> onRequest(RequestContext context) async{
   return switch(context.request.method){
-    HttpMethod.get => _getUsers(),
-    HttpMethod.post => _createUser(context),
+    HttpMethod.post => _getUsersDetails(context),
     _=> Future.value(Response(body:'default message, http method not set'))
   };
 }
@@ -22,7 +21,7 @@ Future<Response> onRequest(RequestContext context) async{
  get users doesn't take any arguments or context as its called in dart
  the function returns a response saying all users are displayed and the users 
  printed to the console */
-Future<Response> _getUsers() async {
+Future<Response> _getUsersDetails(context) async {
   /* findMany() returns all the tuples in a given table
   the function returns a iterable type. Iterable is a list in Dart that doesn't 
   have the ability to be randomly accessed*/
@@ -73,7 +72,7 @@ Future<Response> _createUser(RequestContext context)async{
       name: name,
       email: email.toLowerCase(),
       password: password,
-      userTimezone: userTimezone,
+      userTimezone: PrismaUnion.$1(userTimezone),
 
     ),),
   );

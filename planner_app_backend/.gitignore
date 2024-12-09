@@ -8,6 +8,7 @@ cloud-sql-proxy
 hunter-439519-4b323ff9b0daa.json
 hunter-439519-4b323ff9b0daa.json:Zone.Identifier
 node_modules
+/prisma/migrations
 
 # See https://www.dartlang.org/guides/libraries/private-files
 .env

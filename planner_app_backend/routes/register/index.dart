@@ -1,4 +1,4 @@
-import 'dart:math';
+// ignore_for_file: lines_longer_than_80_chars
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:orm/orm.dart';
@@ -31,11 +31,13 @@ Future<Response> _getUsers() async {
   // https://dart.dev/libraries/collections/iterables
   final users = await prisma.users.findMany();
   // I am looping through every item in the iterable list and printing its id 
-  //  and name to the dart console. This can be removed if the iterable is returned and read client side
+  // and name to the dart console. This can be removed if the iterable is 
+  // returned and read client side
   for (final element in users){
     print('users ID is ${element.userId}, the users name is: ${element.name}');
   }
-  // returning a message that lets user know that all users were read successfully
+  // returning a message that lets user know that all users were read 
+  // successfully
   return Response.json(
     body:{'message':'all users displayed'},
   );
@@ -46,14 +48,15 @@ Future<Response> _getUsers() async {
 The functions returns a message letting you know what error you ran into or if
 the user was created successfully
 
-the function requires a context argument to get the users json data when the route 
-is called
+the function requires a context argument to get the users json data 
+when the route is called
 
  */
 Future<Response> _createUser(RequestContext context)async{
   // transform the information from the request into json in the form of a map
   final json = (await context.request.json()) as Map<String,dynamic>;
-  //function tries to create user, if there are errors it will output those errors
+  //function tries to create user, if there are errors it will 
+  //output those errors
   try{
     //assign the name, email, password, username and timezone  of the user
     //as data-type casts the dynamic into the data-type of the attribute
@@ -62,7 +65,8 @@ Future<Response> _createUser(RequestContext context)async{
     final password = json['password'] as String;
     final username = json['username'] as String;
     final userTimezone = json ['userTimeZone']as int;
-    // empty names, username, emails or passwords are not allowed and throw a format exception
+    // empty names, username, emails or passwords are not allowed
+    // and throw a format exception
     if (username=='' || password==''|| email=='' || name==''){
       // function catched format exceptions and lets user know about error
       // https://www.dhiwise.com/post/dart-throw-how-to-effectively-handle-errors-and-exceptions
@@ -75,8 +79,7 @@ Future<Response> _createUser(RequestContext context)async{
         name: name,
         email: email.toLowerCase(),
         password: password,
-        userTimezone: userTimezone,
-        joinDate: PrismaUnion.$1(DateTime.now()),
+        userTimezone: PrismaUnion.$1(userTimezone),
 
       ),),
     );
@@ -95,19 +98,11 @@ Future<Response> _createUser(RequestContext context)async{
       throw Exception('user not found/ incorrect email');
     }
   
-    await prisma.todoLists.create(
-      data: PrismaUnion.$1(TodoListsCreateInput(
-        users: UsersCreateNestedOneWithoutTodoListsInput(
-          connect: UsersWhereUniqueInput(
-            userId: user.userId,
-          ),
-        ),
-        listId: Random().nextInt(10000) +1,
-      ),),
-    );
+ 
   //  as  a security measure I need to add hashing for the passwords. 
   // I will comeback and add this if I have time
-  // if the transaction is successfull the user is created and the details are displayed
+  // if the transaction is successfull the user is created and the details 
+  // are displayed
   return Response.json(
     body:{
       'message':'Saved!',
@@ -119,7 +114,8 @@ Future<Response> _createUser(RequestContext context)async{
     },
   );
   // the error handling is defined below
-  // there may be more errors but these have been the most common issues I have seen
+  // there may be more errors but these have been the most common issues 
+  // I have seen
   }on FormatException {
     return Response.json(
       body:{

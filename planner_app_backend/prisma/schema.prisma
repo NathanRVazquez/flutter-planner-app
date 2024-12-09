@@ -8,73 +8,40 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-//  all ids should hashtags
-// create date should be required
-model assignments {
-  assignment_id   Int               @id @default(autoincrement())
-  create_date     DateTime?         @db.Timestamp(6)
-  subject         String            @db.VarChar(255)
-  notes           String?
-  due_date        DateTime?         @db.Timestamp(6)
-  assignment_type assignment_type?
-  list_id         Int
-  todo_lists      todo_lists        @relation(fields: [list_id], references: [list_id], onDelete: NoAction, onUpdate: NoAction)
-  project_members project_members[]
-  projects        projects?
-  reminders       reminders?
-}
-
-model project_members {
-  project_member_id Int         @id @default(autoincrement())
-  assignment_id     Int
-  member_username   String?     @db.VarChar(255)
-  assignments       assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
-  users             users?      @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)
-}
-// create date is mandatory
-model projects {
-  assignment_id Int         @unique
-  complete_date DateTime?   @db.Timestamp(6)
-  completed     Boolean
-  assignments   assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
-  tasks         tasks[]
-}
-// reminder category is required
-// add other to reminder category
-model reminders {
-  assignment_id     Int                @unique
-  reminder_category reminder_category?
-  assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model tasks {
-  assignment_id  Int       @unique
-  complete_date  DateTime? @db.Timestamp(6)
-  completed      Boolean
-  parent_project Int?
-  // assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
-  projects       projects? @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
-}
-// list_id should auto increment like user id
-model todo_lists {
-  user_id     Int
-  list_id     Int           @id
-  assignments assignments[]
-  users       users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
+// turn off @defualt user id, user id should be firebase user id. email is insecure
 model users {
-  user_id         Int               @id @default(autoincrement())
+  user_id         String            @id @default(cuid())
   email           String            @db.VarChar(255)
   signin_method   String?           @db.VarChar(255)
   name            String            @db.VarChar(255)
   device          String?           @db.VarChar(255)
   username        String            @unique @db.VarChar(255)
   password        String            @db.VarChar(255)
-  join_date       DateTime?         @db.Timestamp(6)
-  user_timezone   Int
+  join_date       DateTime          @default(now())
+  user_timezone   Int?
   project_members project_members[]
-  todo_lists      todo_lists[]
+  // todo_lists      todo_lists[]
+  assignments assignments[]
+}
+
+//  all ids should use cuid and be strings
+// create date should be required
+// create date is mandatory, now()
+model assignments {
+  assignment_id   String            @id @default(cuid())
+  create_date     DateTime          @default(now())
+  updated_at      DateTime?         @updatedAt
+  subject         String            @db.VarChar(255)
+  notes           String?
+  due_date        DateTime?         @db.Timestamp(6)
+  user_id         String 
+  assignment_type assignment_type
+  users           users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  // list_id         Int
+  // todo_lists      todo_lists        @relation(fields: [list_id], references: [list_id], onDelete: NoAction, onUpdate: NoAction)
+  projects        projects?
+  reminders       reminders?
+  tasks            tasks?
 }
 
 enum assignment_type {
@@ -83,10 +50,61 @@ enum assignment_type {
   Project
 }
 
+// create relation to assignments
+model tasks {
+  assignment_id  String       @unique
+  complete_date  DateTime?    @db.Timestamp(6)
+  completed      Boolean
+  parent_project String?
+  assignments    assignments  @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+  projects       projects? @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+// reminder category is required
+// reminder category default is other
+model reminders {
+  assignment_id     String                @unique
+  reminder_category reminder_category
+  assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+// add type other
 enum reminder_category {
   Event
   Meeting
   Webinar
   Interview
   Tutoring
+  Other
 }
+
+// list_id should auto increment like user id
+// user_id should be unique
+// model todo_lists {
+//   user_id     Int
+//   list_id     Int           @id
+//   assignments assignments[]
+//   users       users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+// }
+
+// create relation between projects and tasks
+model projects {
+  assignment_id   String         @unique
+  complete_date   DateTime?      @db.Timestamp(6)
+  completed       Boolean
+  assignments     assignments @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+  tasks           tasks[]
+  project_members project_members[]
+}
+
+// assigned to projects, review later
+model project_members {
+  project_member_id String     @id @default(cuid())
+  assignment_id     String
+  member_username   String     @db.VarChar(255)
+  project           projects   @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
+  users             users      @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)
+}
+
+
+
