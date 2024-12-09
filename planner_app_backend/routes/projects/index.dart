@@ -102,6 +102,42 @@ Future<bool> markSubtasksIncomplete(String project_id, DateTime curr_time) async
     return true;
 }
 
+Future<bool> deleteSubtasks(String project_id) async{
+
+
+    final project_subtasks = await prisma.tasks.findMany(
+      // the where clause lets us choose what assignment attribute we want to filter by
+      where: TasksWhereInput(
+        // we use union to return a datatype that could be null
+        parentProject: PrismaUnion.$1(
+          StringNullableFilter(
+            equals: PrismaUnion.$1(project_id),
+          ),
+        ),
+      ),
+    );
+
+    // if ther user has no reminders then we can throw an error for the user
+    if(project_subtasks.isEmpty){
+      return true;
+    }
+
+    for (final element in project_subtasks){
+      // the reminders.reminderCategory will throw errors if the assignment is not in the reminders table
+      
+      await prisma.tasks.delete(
+          where: TasksWhereUniqueInput(assignmentId: element.assignmentId),
+      );
+       
+      await prisma.assignments.delete(
+        where: AssignmentsWhereUniqueInput(assignmentId: element.assignmentId),
+      );
+
+    }
+
+    return true;
+}
+
 /*
 _createReminders will create a reminder for a user.
 It requires the following fields:subject and email.
@@ -319,8 +355,12 @@ Future<Response> _deleteProject(RequestContext context) async{
   try{
 
     final json = (await context.request.json()) as Map<String,dynamic>;
-    // final email = json['email'] is String ? json['email'] as String : '';
     final assignmentId = json['assignment_id'] as String;
+
+    bool subtasksDeleted = await deleteSubtasks(assignmentId);
+
+    if(!subtasksDeleted){throw Exception('error updating subtasks');}
+
     await prisma.projects.delete(
         where: ProjectsWhereUniqueInput(assignmentId: assignmentId),
     );
@@ -329,8 +369,9 @@ Future<Response> _deleteProject(RequestContext context) async{
         where: AssignmentsWhereUniqueInput(assignmentId: assignmentId),
     );
 
+
   }catch(e){
     return Response.json(body: '$e');
   }
-    return Response(body: 'Task deleted');
+    return Response(body: 'Project deleted');
   }

@@ -14,7 +14,6 @@ function should be called based on the HTTP method sent
  */
 Future<Response> onRequest(RequestContext context) async{
   return switch(context.request.method){
-    HttpMethod.get => _getUsers(),
     HttpMethod.post => _createUser(context),
     _=> Future.value(Response(body:'default message, http method not set'))
   };
@@ -64,7 +63,7 @@ Future<Response> _createUser(RequestContext context)async{
     final email = json ['email'] as String;
     final password = json['password'] as String;
     final username = json['username'] as String;
-    final userTimezone = json ['userTimeZone']as int;
+    final userTimezone = json ['user_timezone']as int;
     // empty names, username, emails or passwords are not allowed
     // and throw a format exception
     if (username=='' || password==''|| email=='' || name==''){

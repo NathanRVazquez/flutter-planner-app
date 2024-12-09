@@ -1,6 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 import 'package:dart_frog/dart_frog.dart';
 import 'package:orm/orm.dart';
+// import 'package:test/test.dart';
 // import 'package:postgres/messages.dart';
 // import the prisma client so prisma functions can run
 import '../../prisma/generated_dart_client/client.dart';
@@ -183,6 +184,7 @@ Future<Response> _updateTask(RequestContext context) async {
     can be converted to a string or should be defaulted to an empty string
     defaulting to an empty string prevents null errors */
     final assignmentId = json['assignment_id'] as String;
+    if(assignmentId == ''){throw Exception('assignment_id is an empty string');}
     final newSubject = json['subject'] as String?;
     final newNotes = json['notes'] as String?;
     final newDueDate = json ['due_date'] as DateTime?;
@@ -261,8 +263,8 @@ Future<Response> _deleteTask(RequestContext context) async{
   try{
 
     final json = (await context.request.json()) as Map<String,dynamic>;
-    // final email = json['email'] is String ? json['email'] as String : '';
     final assignmentId = json['assignment_id'] as String;
+    if(assignmentId == ''){throw Exception('assignment_id is an empty string');}
     await prisma.tasks.delete(
         where: TasksWhereUniqueInput(assignmentId: assignmentId),
     );
