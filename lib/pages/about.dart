@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:planner_app/pages/home.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/reminder.dart';
+import 'package:planner_app/pages/support.dart';
 import 'package:planner_app/pages/task.dart';
 import 'package:url_launcher/link.dart';
 
@@ -103,7 +104,7 @@ class AboutPageState extends State<AboutPage>{
       _taskPageRoute();
         break;
       case 2:
-      _aboutPageRoute();
+      _supportPageRoute();
     }
   }
 
@@ -134,10 +135,10 @@ class AboutPageState extends State<AboutPage>{
     );
   }
   
-  void _aboutPageRoute(){
+  void _supportPageRoute(){
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AboutPage()),
+      MaterialPageRoute(builder: (context) => const SupportPage()),
     );
   }
 

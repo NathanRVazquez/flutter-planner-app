@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:planner_app/pages/Reminder.dart';
+import 'package:planner_app/pages/about.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/home.dart';
 import 'package:planner_app/pages/support.dart';
@@ -93,6 +94,7 @@ class TaskPageState extends State<TaskPage> {
 
 Widget _bottomNavBar(){
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
@@ -132,6 +134,8 @@ Widget _bottomNavBar(){
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
+
+
 
   void _reminderPageRoute(){
     Navigator.pushReplacement(
