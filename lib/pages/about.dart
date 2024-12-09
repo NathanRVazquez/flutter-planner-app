@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:planner_app/pages/home.dart';
 import 'package:planner_app/pages/login.dart';
+import 'package:planner_app/pages/reminder.dart';
 import 'package:planner_app/pages/task.dart';
+import 'package:url_launcher/link.dart';
+
 
 class AboutPage extends StatefulWidget{
   const AboutPage({super.key});
@@ -28,8 +31,18 @@ class AboutPageState extends State<AboutPage>{
             ),
             AppBar(title: const Text("Description",style: TextStyle(fontSize: 40, color: Colors.black)), centerTitle: true, backgroundColor: Colors.white, ),
             const Text("insert description",style: TextStyle(fontSize: 20, color: Colors.black)),
-            AppBar(title: const Text("Code", style: TextStyle(fontSize: 40, color: Colors.black)), centerTitle: true, backgroundColor: Colors.white),
-            const Text("insert link to code", style: TextStyle(fontSize: 20, color: Colors.black)),
+            AppBar(title: const Text("Code URL:", style: TextStyle(fontSize: 40, color: Colors.black)), centerTitle: true, backgroundColor: Colors.white),
+            Link(uri: Uri.parse('https://gitlab.com/dartapps/hunter/group-project-two-team-six/-/tree/loginpage/lib?ref_type=heads'),
+                target: LinkTarget.blank,
+                builder: (context, followLink) => GestureDetector(
+                  onTap: followLink,
+                  child: const Text(
+                      'Click here to visit Gitlab',
+                      style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline, fontSize: 16),
+                    ),
+                ),
+              ),
+            
           ]
         ),
       ),
@@ -60,15 +73,16 @@ class AboutPageState extends State<AboutPage>{
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
-          label: 'Calendar',
+          label: 'Reminder',
+
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.task),
           label: 'Tasks',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.assignment),
-          label: 'Projects',
+          icon: Icon(Icons.question_mark_rounded),
+          label: 'Support',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.info_outline),
@@ -83,11 +97,13 @@ class AboutPageState extends State<AboutPage>{
   void _onTap(int index){
     switch(index) {
       case 0:
-        // _calendarPageRoute();
+      _reminderPageRoute();
         break;
       case 1:
-        _taskPageRoute();
+      _taskPageRoute();
         break;
+      case 2:
+      _aboutPageRoute();
     }
   }
 
@@ -111,6 +127,20 @@ class AboutPageState extends State<AboutPage>{
         MaterialPageRoute(builder: (context) => const TaskPage())
     );
   }
+  void _reminderPageRoute (){
+   Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ReminderPage())
+    );
+  }
+  
+  void _aboutPageRoute(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AboutPage()),
+    );
+  }
 
 
 }
+

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:planner_app/pages/Reminder.dart';
+import 'package:planner_app/pages/about.dart';
 import 'package:planner_app/pages/login.dart';
 import 'package:planner_app/pages/support.dart';
 import 'package:planner_app/pages/task.dart';
+
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -46,6 +48,7 @@ class HomePageState extends State<HomePage> {
 
  Widget _bottomNavBar(){
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
@@ -59,6 +62,10 @@ class HomePageState extends State<HomePage> {
           icon: Icon(Icons.question_mark_rounded),
           label: 'Support',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.info_outline_rounded),
+          label: 'About',
+        )
       ],
       onTap: _onTap,
       currentIndex: _currentIndex,
@@ -75,6 +82,9 @@ class HomePageState extends State<HomePage> {
         break;
       case 2:
         _supportPageRoute();
+        break;
+      case 3:
+        _aboutPageRoute();
         break;
     }
   }
@@ -103,6 +113,13 @@ class HomePageState extends State<HomePage> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const SupportPage())
+    );
+  }
+
+  void _aboutPageRoute(){
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const AboutPage()),
     );
   }
 }
