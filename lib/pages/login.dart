@@ -18,15 +18,32 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
   final GoogleAuth _googleAuth = GoogleAuth();
 
-  void _googleSignIn() async { // Google sign in method
-    final user = await _googleAuth.googleSignIn();
-    if (user != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    }
+void _googleSignIn() async {
+  final user = await _googleAuth.googleSignIn();
+  if (user != null) {
+    // Show success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Login Successful with Google!'),
+        backgroundColor: Color.fromARGB(119, 144, 196, 255),
+      ),
+    );
+
+    // Navigate to HomePage
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  } else {
+    // Show error message if the login failed
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Google Login failed. Please try again.'),
+        backgroundColor: Color.fromARGB(119, 144, 196, 255),
+      ),
+    );
   }
+}
 
  Future<void> _emailSignIn() async {
   // Check if email and password are not empty
@@ -58,13 +75,14 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   // Only navigate if sign-in was successful
-  if (info == "Login Successful") {
+  if (info == "Login Successfully") {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const HomePage()),
     );
   }
 }
+
 
 void _forgotPassword() { // Reset Password
   showDialog(
