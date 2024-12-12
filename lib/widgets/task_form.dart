@@ -2,7 +2,6 @@ import 'package:planner_app/classes/task_assignment.dart';
 import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:uuid/uuid.dart';
-import 'dart:convert';
 
 class TaskForm extends StatefulWidget {
   final TaskAssignment? task;
@@ -22,7 +21,6 @@ class TaskFormState extends State<TaskForm> {
   String? _notes;
   DateTime? _dueDate;
 
-  DateTime? _completeDate;
   late bool _completed = false;
 
   Future<void> _selectDateTime(BuildContext context, DateTime? currentDate, Function(DateTime) onDatePicked) async {
@@ -62,7 +60,6 @@ class TaskFormState extends State<TaskForm> {
       _dueDate = widget.task!.dueDate;
       _notes = widget.task!.notes;
       _completed = widget.task!.completed;
-      _completeDate = widget.task!.completeDate;
     }
     else {
       _createDate = DateTime.now();
@@ -127,35 +124,9 @@ class TaskFormState extends State<TaskForm> {
                 onChanged: (value) {
                   setState(() {
                     _completed = value!;
-                    if (!_completed) {
-                      _completeDate = null;
-                    }
                   });
                 },
               ),
-              if (_completed)
-                GestureDetector(
-                  onTap: () {
-                    _selectDateTime(context, _completeDate, (pickedDate) {
-                      setState(() {
-                        _completeDate = pickedDate;
-                      });
-                    });
-                  },
-                  child: AbsorbPointer(  // Prevents manual text input
-                    child: TextField(
-                      controller: TextEditingController(
-                        text: _completeDate != null
-                            ? _completeDate!.format(DateTimeFormats.american)
-                            : 'Select completion date',  // Default text
-                      ),
-                      decoration: const InputDecoration(
-                        labelText: 'Completion Date',
-                        hintText: 'Tap to select a date',
-                      ),
-                    ),
-                  ),
-                ),
               GestureDetector(
                 onTap: () {
                   _selectDateTime(context, _dueDate, (pickedDate) {
@@ -194,7 +165,7 @@ class TaskFormState extends State<TaskForm> {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
               final newTask = TaskAssignment(
-                id: widget.task?.id ?? Uuid().v4(),
+                id: widget.task?.id ?? const Uuid().v4(),
                 subject: _subject,
                 notes: _notes,
                 completed: _completed,
