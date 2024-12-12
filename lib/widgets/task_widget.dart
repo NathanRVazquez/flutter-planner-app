@@ -65,10 +65,11 @@ class TaskWidget extends StatelessWidget {
               leading: Checkbox(
                 fillColor: const WidgetStatePropertyAll(Colors.white),
                 side: WidgetStateBorderSide.resolveWith((states) {
-                  if (states.contains(WidgetState.selected))
+                  if (states.contains(WidgetState.selected)) {
                     return const BorderSide(color: Colors.black);
-                  else
+                  } else {
                     return const BorderSide(color: Colors.blue);
+                  }
                 }
                 ),
                 checkColor: Colors.black,
@@ -116,27 +117,23 @@ class TaskWidget extends StatelessWidget {
                 )
               ]),
             ),
-            ExpansionTile(
-              backgroundColor: Colors.white70,
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              collapsedBackgroundColor: Colors.black,
-              collapsedTextColor: Colors.white,
-              collapsedIconColor: Colors.white,
-              title: Text(
-                  (formattedDueDate + ' | id: ' + task.id.toString()),
-              ),
-              children: [
-                for (final subtask in subtasks) _buildSubtaskRow(context, subtask),
-
-                // Add a plus icon for adding a new subtask
-                ListTile(
-                  leading: Icon(Icons.add, color: Theme.of(context).primaryColor),
-                  title: Text('Add a new subtask', style: TextStyle(color: Theme.of(context).primaryColor)),
-                  onTap: () => onAddSubtask(task), // Pass the parent task
+            Container(
+              color: Colors.black,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  children: <Widget>[
+                    const SizedBox(width: 8),
+                    Expanded(
+                        child: Text(
+                            formattedDueDate,
+                            style: const TextStyle(color: Colors.white)
+                        )
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            )
           ],
         ),
       ),
@@ -152,11 +149,12 @@ class TaskWidget extends StatelessWidget {
       leading: Checkbox(
         fillColor: const WidgetStatePropertyAll(Colors.white),
         side: WidgetStateBorderSide.resolveWith((states) {
-            if (states.contains(WidgetState.selected))
-              return const BorderSide(color: Colors.black);
-            else
-              return const BorderSide(color: Colors.blue);
+            if (states.contains(WidgetState.selected)) {
+            return const BorderSide(color: Colors.black);
+          } else {
+            return const BorderSide(color: Colors.blue);
           }
+        }
         ),
         checkColor: Colors.black,
         value: subtask.completed,
@@ -171,7 +169,7 @@ class TaskWidget extends StatelessWidget {
       ),
       subtitle: Text(
           (subtaskDueText + '\nid: ' + subtask.id.toString()),
-        style: TextStyle(color: Colors.black, fontSize: 15)
+        style: const TextStyle(color: Colors.black, fontSize: 15)
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
