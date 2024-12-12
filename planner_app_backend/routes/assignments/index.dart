@@ -45,7 +45,7 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
 
     // use map or fold instead of cast, where type 
     final email = json['email'] is String ? json['email'] as String : '';
-    String assignment_type = json['assignment_type'] is String ? json['email'] as String : '';
+    String assignment_type = json['assignment_type'] is String ? json['assignment_type'] as String : '';
     assignment_type = assignment_type.toLowerCase();
     // empty names or passwords are not allowed and throw a format exception
     if (email == '' ){
@@ -76,6 +76,8 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
     // with the users id we are going to retrieve all the assignments with type reminder
     // and send them as a encoded JSON object. We need to decode them in the front end using 
     // dart methods
+    print('Assignment Type:');
+    print(assignment_type);
     if(assignment_type == 'tasks'){
       users_assignments = await prisma.assignments.findMany(
         // the where clause lets us choose what assignment attribute we want to filter by
@@ -91,7 +93,7 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
           // include all tuples from reminders and todo lists 
           // this should be joining the reminders table, assignments and todolists tables
           // TODO: verify all tables are being joined properly
-          reminders: PrismaUnion.$1(true),
+          tasks: PrismaUnion.$1(true),
 
         ),
       );

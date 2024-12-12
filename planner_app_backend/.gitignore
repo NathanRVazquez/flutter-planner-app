@@ -10,6 +10,8 @@ hunter-439519-4b323ff9b0daa.json:Zone.Identifier
 node_modules
 /prisma/migrations
 
+
+
 # See https://www.dartlang.org/guides/libraries/private-files
 .env
 # Files and directories created by the Operating System
