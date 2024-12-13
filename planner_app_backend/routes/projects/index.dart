@@ -183,7 +183,7 @@ Future<Response> _createProject(RequestContext context) async {
 
     final subject = json['subject'] as String;
     var notes = json['notes'];
-    var dueDate = json['due_date'] ;
+    var dueDate = json['due_date']  ;
     // Subject field is required
     if ( subject==''){
     // function catched format exceptions and lets user know about error
@@ -198,7 +198,7 @@ Future<Response> _createProject(RequestContext context) async {
       data: PrismaUnion.$1(AssignmentsCreateInput(
         subject: subject,
         notes: notes!= null ? PrismaUnion.$1(notes as String) : null,
-        dueDate: dueDate!= null ? PrismaUnion.$1(dueDate as DateTime) : null,  
+        dueDate: dueDate!= null ? PrismaUnion.$1(DateTime.parse(dueDate as String)) : null,  
         assignmentType:  AssignmentType.project,
         users: UsersCreateNestedOneWithoutAssignmentsInput(
           connect: UsersWhereUniqueInput(
@@ -267,13 +267,52 @@ Future<Response> _updateProject(RequestContext context) async {
     can be converted to a string or should be defaulted to an empty string
     defaulting to an empty string prevents null errors */
     final assignmentId = json['assignment_id'] as String;
+    if(assignmentId == ''){throw Exception('assignment_id is an empty string');}
+
     final newSubject = json['subject'] as String?;
     final newNotes = json['notes'] as String?;
-    final newDueDate = json ['due_date'] as DateTime?;
+    String? dueDate = json ['due_date'] as String?;
     final completed = json ['completed'] as bool?;
     final now = DateTime.now();
     List<Map<String, Object?>> assignment;
-    if(newSubject != null){
+
+    if((newSubject !=null || newSubject !='') && (newNotes !=null || newNotes !='')
+        && (dueDate !=null || dueDate != '' ) && (completed !=null )){
+ 
+      final newDueDate = DateTime.parse(dueDate!);
+      
+      await prisma.$raw.query(
+      'UPDATE assignments SET "updated_at" = \$1, "subject" = \$2, "notes" = \$3, "due_date" = \$4 WHERE assignments.assignment_id = \$5 ',
+      [now, newSubject!, newNotes!, newDueDate, assignmentId],
+      );
+
+      if(completed){
+
+        assignment = await prisma.$raw.query(
+        'UPDATE projects SET completed = true, complete_date = \$1 FROM assignments WHERE projects.assignment_id = \$2 AND assignments.assignment_id = projects.assignment_id RETURNING *',
+        [now, assignmentId],
+        );
+
+              // call function to complete sub assignments
+        Map<String, Object?> curr_assignment = assignment.first;
+        String curr_assignment_id = curr_assignment['assignment_id']! as String;
+        bool subtasks_marked_completed = await markSubtasksComplete(curr_assignment_id, now);
+        if(!subtasks_marked_completed){throw Exception('error updating subtasks');}
+
+      }else{
+        assignment = await prisma.$raw.query(
+          'UPDATE projects SET completed = false, complete_date = null FROM assignments WHERE projects.assignment_id = \$1 AND assignments.assignment_id = projects.assignment_id RETURNING *',
+          [assignmentId],
+        );
+
+        Map<String, Object?> curr_assignment = assignment.first;
+        String curr_assignment_id = curr_assignment['assignment_id']! as String;
+        bool subtasks_marked_incomplete = await markSubtasksIncomplete(curr_assignment_id, now);
+        if(!subtasks_marked_incomplete){throw Exception('error updating subtasks');}
+      }
+
+
+    }else if(newSubject != null){
        assignment = await prisma.$raw.query(
         'UPDATE assignments SET "subject" = \$1, "updated_at" = \$2 FROM projects WHERE assignments.assignment_id = \$3 AND assignments.assignment_id = projects.assignment_id RETURNING *',
       [newSubject, now, assignmentId], // Bind parameters
@@ -319,11 +358,16 @@ Future<Response> _updateProject(RequestContext context) async {
       bool subtasks_marked_incomplete = await markSubtasksIncomplete(curr_assignment_id, now);
       if(!subtasks_marked_incomplete){throw Exception('error updating subtasks');}
       
-    }else if(newDueDate != null){
-        assignment = await prisma.$raw.query(
+    }else if(dueDate != null && dueDate != ''){
+      
+      final newDueDate = DateTime.parse(dueDate);
+
+
+      assignment = await prisma.$raw.query(
       'UPDATE assignments SET "subject" = \$1, "updated_at" = \$2 FROM projects WHERE assignments.assignment_id = \$3 AND projects.assignment_id = assignments.assignment_id RETURNING *',
       [newDueDate, now, assignmentId], // Bind parameters
       );
+
     }else{
       throw Exception('notes, subject, dueDate, and completed fields were null');
     }

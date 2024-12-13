@@ -61,7 +61,7 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
     final user = await prisma.users.findFirst(
       where: UsersWhereInput(
         email: PrismaUnion.$1(
-          StringFilter(contains: PrismaUnion.$1(email)),
+          StringFilter(equals: PrismaUnion.$1(email)),
         ),
       ),
     );
@@ -81,8 +81,10 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
     if(assignment_type == 'tasks'){
       users_assignments = await prisma.assignments.findMany(
         // the where clause lets us choose what assignment attribute we want to filter by
-        where:  const AssignmentsWhereInput(
-          // we use union to return a datatype that could be null
+        where:   AssignmentsWhereInput(
+          userId:  PrismaUnion.$1(
+          StringFilter(equals: PrismaUnion.$1(user.userId!)),
+          ),
           assignmentType: PrismaUnion.$1(EnumassignmentTypeFilter(
             // the assignment type must equal reminder
             equals: PrismaUnion.$1(AssignmentType.task),
@@ -100,7 +102,10 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
     }else if(assignment_type == 'reminders'){
       users_assignments = await prisma.assignments.findMany(
         // the where clause lets us choose what assignment attribute we want to filter by
-        where:  const AssignmentsWhereInput(
+        where:   AssignmentsWhereInput(
+          userId:  PrismaUnion.$1(
+          StringFilter(equals: PrismaUnion.$1(user.userId!)),
+          ),
           // we use union to return a datatype that could be null
           assignmentType: PrismaUnion.$1(EnumassignmentTypeFilter(
             // the assignment type must equal reminder
@@ -127,7 +132,10 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
     }else if (assignment_type == 'projects'){
             users_assignments = await prisma.assignments.findMany(
         // the where clause lets us choose what assignment attribute we want to filter by
-        where:  const AssignmentsWhereInput(
+        where:   AssignmentsWhereInput(
+          userId:  PrismaUnion.$1(
+          StringFilter(equals: PrismaUnion.$1(user.userId!)),
+          ),
           // we use union to return a datatype that could be null
           assignmentType: PrismaUnion.$1(EnumassignmentTypeFilter(
             // the assignment type must equal reminder
@@ -144,8 +152,14 @@ Future<Response> _getUsersAssignments(RequestContext context) async {
       );
     }else{
       users_assignments = await prisma.assignments.findMany(
+        where: AssignmentsWhereInput(
+          userId:  PrismaUnion.$1(
+          StringFilter(equals: PrismaUnion.$1(user.userId!)),
+          ),
+        ),
         // the where clause lets us choose what assignment attribute we want to filter by
         include: const AssignmentsInclude(
+          
           // include all tuples from reminders and todo lists 
           // this should be joining the reminders table, assignments and todolists tables
           // TODO: verify all tables are being joined properly
