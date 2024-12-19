@@ -106,9 +106,9 @@ Future<Response> _createUser(RequestContext context)async{
     body:{
       'message':'Saved!',
       'user':{
-        username: username,
-        name: name,
-        email: email,
+        'username': username,
+        'name': name,
+        'email': email,
       },
     },
   );

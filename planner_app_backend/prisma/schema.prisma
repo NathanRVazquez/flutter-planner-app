@@ -1,13 +1,12 @@
 generator client {
   provider = "dart run orm"
-  // output   = "../lib/src/prisma/generated"
-
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 // turn off @defualt user id, user id should be firebase user id. email is insecure
 model users {
   user_id         String            @id @default(cuid())
@@ -20,13 +19,9 @@ model users {
   join_date       DateTime          @default(now())
   user_timezone   Int?
   project_members project_members[]
-  // todo_lists      todo_lists[]
   assignments assignments[]
 }
 
-//  all ids should use cuid and be strings
-// create date should be required
-// create date is mandatory, now()
 model assignments {
   assignment_id   String            @id @default(cuid())
   create_date     DateTime          @default(now())
@@ -37,8 +32,6 @@ model assignments {
   user_id         String 
   assignment_type assignment_type
   users           users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
-  // list_id         Int
-  // todo_lists      todo_lists        @relation(fields: [list_id], references: [list_id], onDelete: NoAction, onUpdate: NoAction)
   projects        projects?
   reminders       reminders?
   tasks            tasks?
@@ -50,7 +43,6 @@ enum assignment_type {
   Project
 }
 
-// create relation to assignments
 model tasks {
   assignment_id  String       @unique
   complete_date  DateTime?    @db.Timestamp(6)
@@ -60,15 +52,13 @@ model tasks {
   projects       projects? @relation(fields: [parent_project], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-// reminder category is required
-// reminder category default is other
+// only return reminders whose due date hasnt passed. advanced prisma/sql query
 model reminders {
   assignment_id     String                @unique
   reminder_category reminder_category
   assignments       assignments        @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-// add type other
 enum reminder_category {
   Event
   Meeting
@@ -78,16 +68,6 @@ enum reminder_category {
   Other
 }
 
-// list_id should auto increment like user id
-// user_id should be unique
-// model todo_lists {
-//   user_id     Int
-//   list_id     Int           @id
-//   assignments assignments[]
-//   users       users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
-// }
-
-// create relation between projects and tasks
 model projects {
   assignment_id   String         @unique
   complete_date   DateTime?      @db.Timestamp(6)
@@ -105,6 +85,3 @@ model project_members {
   project           projects   @relation(fields: [assignment_id], references: [assignment_id], onDelete: NoAction, onUpdate: NoAction)
   users             users      @relation(fields: [member_username], references: [username], onDelete: NoAction, onUpdate: NoAction)
 }
-
-
-
